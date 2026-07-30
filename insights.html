@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Insights — SLATES</title>
+<meta name="description" content="Answers to the questions business owners ask most about websites, Google Business Profiles, SEO, and local search." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --ink: #0A0A0A;
+    --ink-dim: rgba(10, 10, 10, 0.62);
+    --ink-faint: rgba(10, 10, 10, 0.1);
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  ::selection { background: var(--ink); color: var(--bg); }
+
+  /* ---------- Header ---------- */
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px clamp(24px, 5vw, 64px);
+    border-bottom: 1px solid var(--ink-faint);
+  }
+
+  .logotype {
+    display: block;
+    height: clamp(20px, 2.6vw, 26px);
+    width: auto;
+  }
+
+  .nav-menu {
+    position: relative;
+  }
+
+  .nav-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 34px;
+    height: 34px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: transform 0.25s var(--ease), opacity 0.25s var(--ease);
+  }
+
+  .nav-toggle[aria-expanded="true"] span:first-child {
+    transform: translateY(4px) rotate(8deg);
+  }
+
+  .nav-toggle[aria-expanded="true"] span:last-child {
+    transform: translateY(-4px) rotate(-8deg);
+  }
+
+  .nav-dropdown {
+    position: absolute;
+    top: calc(100% + 14px);
+    right: 0;
+    min-width: 168px;
+    background: var(--bg);
+    border: 1px solid var(--ink-faint);
+    border-radius: 14px;
+    padding: 8px;
+    box-shadow: 0 20px 50px rgba(10, 10, 10, 0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
+    z-index: 50;
+  }
+
+  .nav-dropdown.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .nav-dropdown a {
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    transition: background 0.15s var(--ease);
+  }
+
+  .nav-dropdown a:hover {
+    background: var(--ink-faint);
+  }
+
+  .nav-dropdown a.active {
+    background: var(--ink-faint);
+  }
+
+  /* ---------- Page header ---------- */
+
+  .page-head {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: clamp(64px, 9vw, 104px) clamp(24px, 6vw, 64px) clamp(32px, 5vw, 48px);
+  }
+
+  .page-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    margin-bottom: 18px;
+  }
+
+  .page-title {
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    font-size: clamp(32px, 5.2vw, 56px);
+  }
+
+  .page-sub {
+    margin-top: 18px;
+    max-width: 56ch;
+    font-size: clamp(15px, 1.6vw, 18px);
+    line-height: 1.6;
+    color: var(--ink-dim);
+  }
+
+  /* ---------- FAQ list ---------- */
+
+  .faq-list {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 64px) clamp(80px, 10vw, 120px);
+  }
+
+  .faq-item {
+    padding: clamp(32px, 5vw, 44px) 0;
+    border-top: 1px solid var(--ink-faint);
+  }
+
+  .faq-item:last-child {
+    border-bottom: 1px solid var(--ink-faint);
+  }
+
+  .faq-question {
+    font-size: clamp(19px, 2.4vw, 24px);
+    font-weight: 700;
+    letter-spacing: -0.005em;
+    line-height: 1.35;
+    margin-bottom: 16px;
+  }
+
+  .faq-answer p {
+    font-size: clamp(15px, 1.6vw, 16.5px);
+    line-height: 1.75;
+    color: var(--ink-dim);
+    margin-bottom: 14px;
+  }
+
+  .faq-answer p:last-child {
+    margin-bottom: 0;
+  }
+
+  .faq-answer ul {
+    margin: 0 0 14px;
+    padding-left: 1.3em;
+  }
+
+  .faq-answer li {
+    font-size: clamp(15px, 1.6vw, 16.5px);
+    line-height: 1.7;
+    color: var(--ink-dim);
+    margin-bottom: 6px;
+  }
+
+  .faq-answer li:last-child {
+    margin-bottom: 0;
+  }
+
+  .faq-callout {
+    font-style: italic;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ---------- Footer ---------- */
+
+  footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px clamp(24px, 5vw, 64px);
+    border-top: 1px solid var(--ink-faint);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--ink-dim);
+  }
+
+  footer a { color: var(--ink-dim); transition: color 0.25s var(--ease); }
+  footer a:hover { color: var(--ink); }
+</style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" aria-label="SLATES home">
+      <img class="logotype" src="ASSETS/slates-logo.png" alt="SLATES" />
+    </a>
+    <div class="nav-menu">
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-dropdown" id="navDropdown">
+        <a href="index.html">Home</a>
+        <a href="insights.html" class="active">Insights</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-head">
+      <p class="page-eyebrow">Insights</p>
+      <h1 class="page-title">Questions business owners ask most</h1>
+      <p class="page-sub">Simple answers on websites, Google Business Profiles, reviews, and local SEO.</p>
+    </div>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <h2 class="faq-question">1. Do I really need a website if I have Facebook?</h2>
+        <div class="faq-answer">
+          <p>Yes. Social media is a great way to reach people, but you don't own it. Algorithms change, accounts can be restricted, and customers often search Google before Facebook.</p>
+          <p>A professional website gives your business a permanent home where you control your brand, services, contact information, and first impression. It also builds trust—many customers expect legitimate businesses to have a website before requesting a quote.</p>
+          <p>Think of social media as your marketing channel and your website as your headquarters.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h2 class="faq-question">2. How much should a small business website cost?</h2>
+        <div class="faq-answer">
+          <p>The right website isn't the cheapest one—it's the one that generates more business than it costs.</p>
+          <p>Simple template websites can cost a few hundred dollars, while fully custom websites often range from $1,000 to several thousand dollars depending on design, features, and strategy.</p>
+          <p>Instead of asking "What's the cheapest website?", ask:</p>
+          <p class="faq-callout">Will this website help customers trust me enough to call?</p>
+          <p>A well-built website should be an investment that pays for itself through new customers.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h2 class="faq-question">3. What makes a great contractor website?</h2>
+        <div class="faq-answer">
+          <p>The best contractor websites are surprisingly simple.</p>
+          <p>They quickly answer four questions:</p>
+          <ul>
+            <li>What do you do?</li>
+            <li>Where do you work?</li>
+            <li>Why should I trust you?</li>
+            <li>How do I contact you?</li>
+          </ul>
+          <p>Strong photography, customer reviews, fast loading speeds, and clear calls to action often matter more than flashy animations or dozens of pages.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h2 class="faq-question">4. How long does it take to build a website?</h2>
+        <div class="faq-answer">
+          <p>Most small business websites can be completed in a few weeks once the necessary information is available.</p>
+          <p>The timeline usually depends on:</p>
+          <ul>
+            <li>Photos</li>
+            <li>Business information</li>
+            <li>Logo and branding</li>
+            <li>Feedback and revisions</li>
+          </ul>
+          <p>Preparing these items early helps the project move much faster.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h2 class="faq-question">5. What is SEO?</h2>
+        <div class="faq-answer">
+          <p>SEO (Search Engine Optimization) is the process of helping your business appear when people search for services you offer.</p>
+          <p>For example: <span class="faq-callout">"Landscaper near me"</span></p>
+          <p>Good SEO involves much more than adding keywords. It includes website performance, helpful content, local business listings, technical optimization, and building trust with search engines over time.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h2 class="faq-question">6. What is Local SEO?</h2>
+        <div class="faq-answer">
+          <p>Local SEO focuses on helping your business appear in location-based searches and map results.</p>
+          <p>This includes optimizing your website along with your Google Business Profile, Apple Business Connect listing, business information, reviews, and local relevance.</p>
+          <p>For many service businesses, Local SEO can be one of the most effective ways to generate qualified leads.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h2 class="faq-question">7. Why isn't my business showing up on Google?</h2>
+        <div class="faq-answer">
+          <p>There are several common reasons:</p>
+          <ul>
+            <li>Your Google Business Profile isn't verified.</li>
+            <li>Your website has little or no SEO.</li>
+            <li>Your business information is inconsistent online.</li>
+            <li>You have very few customer reviews.</li>
+            <li>Your competitors have stronger local authority.</li>
+          </ul>
+          <p>Improving visibility is usually a gradual process rather than a one-time fix.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h2 class="faq-question">8. Do Google reviews actually matter?</h2>
+        <div class="faq-answer">
+          <p>Absolutely.</p>
+          <p>Reviews help potential customers decide whether they trust your business, and they also influence local search visibility.</p>
+          <p>Consistently earning authentic reviews—and responding professionally to them—can improve both credibility and local rankings.</p>
+          <p>The best approach is to make requesting reviews part of your normal customer follow-up process.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h2 class="faq-question">9. How often should I update my website?</h2>
+        <div class="faq-answer">
+          <p>A website should evolve with your business.</p>
+          <p>Updates might include:</p>
+          <ul>
+            <li>New project photos</li>
+            <li>Additional services</li>
+            <li>Team changes</li>
+            <li>Customer testimonials</li>
+            <li>Seasonal promotions</li>
+            <li>Blog or resource articles</li>
+          </ul>
+          <p>Regular updates also signal to search engines that your website remains active and relevant.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h2 class="faq-question">10. What pages should every small business website have?</h2>
+        <div class="faq-answer">
+          <p>Most businesses don't need dozens of pages.</p>
+          <p>A strong website usually includes:</p>
+          <ul>
+            <li>Home</li>
+            <li>Services</li>
+            <li>About</li>
+            <li>Portfolio or Recent Work</li>
+            <li>Reviews</li>
+            <li>Contact</li>
+          </ul>
+          <p>If each page is clear, loads quickly, and makes it easy to contact your business, you'll often outperform larger, cluttered websites.</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <span>&copy; 2026 SLATES by ROQ</span>
+    <a href="mailto:hello@roqhome.com">hello@roqhome.com</a>
+  </footer>
+
+  <script>
+    (function () {
+      const toggle = document.getElementById('navToggle');
+      const dropdown = document.getElementById('navDropdown');
+
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = dropdown.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!dropdown.contains(e.target) && e.target !== toggle) {
+          dropdown.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          dropdown.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

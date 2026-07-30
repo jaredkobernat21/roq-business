@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SLATES — Reshaping First Impressions</title>
+<meta name="description" content="SLATES — reshaping first impressions. Your community deserves to find, trust, and contact you — all in the first 10 seconds." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F6F2E9;
+    --cream-deep: #EEE8DB;
+    --charcoal: #232120;
+    --charcoal-dim: #6E685F;
+    --charcoal-faint: rgba(35,33,32,0.10);
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--charcoal);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  ::selection { background: var(--charcoal); color: var(--cream); }
+
+  /* ---------- Header ---------- */
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px clamp(24px, 5vw, 64px);
+    border-bottom: 1px solid var(--charcoal-faint);
+  }
+
+  .logotype {
+    display: block;
+    height: clamp(20px, 2.6vw, 26px);
+    width: auto;
+  }
+
+  .nav-menu {
+    position: relative;
+  }
+
+  .nav-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 34px;
+    height: 34px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--charcoal);
+    border-radius: 2px;
+    transition: transform 0.25s var(--ease), opacity 0.25s var(--ease);
+  }
+
+  .nav-toggle[aria-expanded="true"] span:first-child {
+    transform: translateY(4px) rotate(8deg);
+  }
+
+  .nav-toggle[aria-expanded="true"] span:last-child {
+    transform: translateY(-4px) rotate(-8deg);
+  }
+
+  .nav-dropdown {
+    position: absolute;
+    top: calc(100% + 14px);
+    right: 0;
+    min-width: 168px;
+    background: var(--cream);
+    border: 1px solid var(--charcoal-faint);
+    border-radius: 14px;
+    padding: 8px;
+    box-shadow: 0 20px 50px rgba(35, 33, 32, 0.14);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
+    z-index: 50;
+  }
+
+  .nav-dropdown.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .nav-dropdown a {
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--charcoal);
+    transition: background 0.15s var(--ease);
+  }
+
+  .nav-dropdown a:hover {
+    background: var(--charcoal-faint);
+  }
+
+  .nav-dropdown a.active {
+    background: var(--charcoal-faint);
+  }
+
+  /* ---------- Orb ---------- */
+
+  .orb-rotator { animation: orbRotate 26s linear infinite; }
+  .orb-breather { animation: orbBreathe 6.4s ease-in-out infinite; }
+
+  @keyframes orbRotate { to { transform: rotate(360deg); } }
+  @keyframes orbBreathe {
+    0%, 100% { transform: scale(0.94); }
+    50% { transform: scale(1.06); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orb-rotator, .orb-breather, .services-cta { animation: none !important; }
+  }
+
+  /* ---------- Hero ---------- */
+
+  .hero {
+    min-height: calc(100vh - 88px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 64px clamp(24px, 8vw, 120px);
+  }
+
+  .hero-orb {
+    margin-bottom: 28px;
+  }
+
+  .hero-headline {
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+    font-size: clamp(36px, 6.4vw, 78px);
+    max-width: 16ch;
+  }
+
+  .hero-sub {
+    margin-top: 24px;
+    max-width: 46ch;
+    font-size: clamp(16px, 1.5vw, 19px);
+    line-height: 1.6;
+    color: var(--charcoal-dim);
+    font-weight: 400;
+  }
+
+  @keyframes ctaBreathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.035); }
+  }
+
+  /* ---------- Hero role bar ---------- */
+
+  .role-bar {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 480px;
+    background: var(--cream);
+    border: 1px solid var(--charcoal-faint);
+    border-radius: 999px;
+    padding: 8px 8px 8px 22px;
+    box-shadow: 0 20px 50px rgba(35, 33, 32, 0.08);
+  }
+
+  .role-label {
+    font-size: clamp(12px, 3vw, 14px);
+    font-weight: 600;
+    color: var(--charcoal);
+    white-space: nowrap;
+  }
+
+  .role-input-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    height: 24px;
+    display: flex;
+    align-items: center;
+  }
+
+  .role-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font: inherit;
+    font-size: clamp(13px, 3.2vw, 15px);
+    color: var(--charcoal);
+    position: relative;
+    z-index: 1;
+  }
+
+  .role-suggestion {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: clamp(13px, 3.2vw, 15px);
+    color: var(--charcoal-dim);
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    white-space: nowrap;
+  }
+
+  .role-submit {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--charcoal);
+    color: var(--cream);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.18s var(--ease), background 0.18s var(--ease);
+  }
+
+  .role-submit svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .role-submit:hover {
+    background: #38352f;
+    transform: translateY(-1px);
+  }
+
+  /* ---------- Footer ---------- */
+
+  footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px clamp(24px, 5vw, 64px);
+    border-top: 1px solid var(--charcoal-faint);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--charcoal-dim);
+  }
+
+  footer a { color: var(--charcoal-dim); transition: color 0.25s var(--ease); }
+  footer a:hover { color: var(--charcoal); }
+
+  /* ---------- Services search section ---------- */
+
+  .services-search {
+    background: #000000;
+    color: var(--cream);
+    padding: clamp(72px, 12vw, 120px) clamp(24px, 8vw, 120px);
+  }
+
+  .services-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: transparent;
+    border: 1px solid rgba(246, 242, 233, 0.16);
+    border-radius: 999px;
+    padding: clamp(18px, 3vw, 24px) clamp(22px, 4vw, 32px);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  }
+
+  .search-icon {
+    flex-shrink: 0;
+    display: flex;
+  }
+
+  .search-icon svg {
+    width: 22px;
+    height: 22px;
+    stroke: var(--cream);
+    opacity: 0.75;
+  }
+
+  .search-text-wrap {
+    flex: 1;
+    min-width: 0;
+    font-size: clamp(14px, 2.4vw, 22px);
+    font-weight: 500;
+    color: var(--cream);
+    overflow-wrap: break-word;
+  }
+
+  .search-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background: var(--cream);
+    margin-left: 2px;
+    vertical-align: -0.15em;
+    animation: cursorBlink 1s step-start infinite;
+  }
+
+  @keyframes cursorBlink { 50% { opacity: 0; } }
+
+  .results-feed {
+    margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .result-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    background: transparent;
+    border: none;
+    border-radius: 16px;
+    padding: 20px clamp(20px, 4vw, 28px);
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
+  }
+
+  .result-row.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .result-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #FFFFFF;
+    margin-top: 2px;
+  }
+
+  .result-icon svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+  }
+
+  .result-text {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .result-title {
+    font-size: clamp(15px, 1.8vw, 17px);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: #FFFFFF;
+  }
+
+  .result-desc {
+    font-size: clamp(13.5px, 1.5vw, 15px);
+    line-height: 1.55;
+    color: rgba(246, 242, 233, 0.6);
+    max-width: 52ch;
+  }
+
+  .services-cta {
+    display: block;
+    margin: 48px auto 0;
+    padding: 15px 34px;
+    background: var(--cream);
+    color: #141312;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform 0.3s var(--ease), background 0.3s var(--ease);
+    animation: ctaBreathe 4s ease-in-out infinite;
+  }
+
+  .services-cta:hover {
+    background: #E9E3D4;
+    transform: translateY(-2px);
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .search-cursor { animation: none !important; }
+  }
+
+  /* ---------- Lead modal ---------- */
+
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 14, 13, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    z-index: 300;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s var(--ease);
+  }
+
+  .modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .modal-card {
+    position: relative;
+    background: var(--cream);
+    color: var(--charcoal);
+    width: 100%;
+    max-width: 560px;
+    max-height: 88vh;
+    overflow-y: auto;
+    border-radius: 20px;
+    padding: clamp(28px, 5vw, 40px);
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.45);
+    transform: translateY(14px) scale(0.98);
+    transition: transform 0.32s var(--ease);
+  }
+
+  .modal-overlay.active .modal-card {
+    transform: translateY(0) scale(1);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: var(--charcoal-faint);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--charcoal);
+  }
+
+  .modal-close svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .modal-intro {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--charcoal-dim);
+    margin-bottom: 26px;
+    padding-right: 24px;
+  }
+
+  .form-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+    flex: 1;
+    min-width: 160px;
+  }
+
+  .field label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--charcoal-dim);
+  }
+
+  .field .opt {
+    text-transform: none;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  .field input,
+  .field textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--charcoal-faint);
+    border-radius: 10px;
+    background: var(--cream);
+    color: var(--charcoal);
+    font-size: 15px;
+    font-family: inherit;
+    transition: border-color 0.2s var(--ease);
+  }
+
+  .field textarea {
+    min-height: 88px;
+    resize: vertical;
+  }
+
+  .field input:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--charcoal);
+  }
+
+  .modal-submit {
+    width: 100%;
+    margin-top: 6px;
+    padding: 15px 30px;
+    background: var(--charcoal);
+    color: var(--cream);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform 0.2s var(--ease), background 0.2s var(--ease), opacity 0.2s var(--ease);
+  }
+
+  .modal-submit:hover {
+    background: #38352f;
+    transform: translateY(-2px);
+  }
+
+  .modal-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .form-msg {
+    margin-top: 12px;
+    font-size: 13px;
+    min-height: 1em;
+  }
+
+  .form-msg.error {
+    color: #B3261E;
+  }
+
+  .modal-thanks {
+    display: none;
+    text-align: center;
+    padding: 12px 0 6px;
+  }
+
+  .modal-thanks.active {
+    display: block;
+  }
+
+  .thanks-mark {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--charcoal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+  }
+
+  .thanks-mark svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .thanks-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .thanks-sub {
+    color: var(--charcoal-dim);
+    font-size: 15px;
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" aria-label="SLATES home">
+      <img class="logotype" src="ASSETS/slates-logo.png" alt="SLATES" />
+    </a>
+    <div class="nav-menu">
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-dropdown" id="navDropdown">
+        <a href="index.html" class="active">Home</a>
+        <a href="insights.html">Insights</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-orb" id="heroOrb"></div>
+      <h1 class="hero-headline">Reshaping First Impressions</h1>
+      <p class="hero-sub">Your community deserves to find, trust, and contact you — all in the first 10 seconds.</p>
+      <form class="role-bar" id="heroRoleForm" autocomplete="off">
+        <label for="heroRoleInput" class="role-label">What do you do?</label>
+        <div class="role-input-wrap">
+          <input type="text" id="heroRoleInput" class="role-input" name="role" />
+          <span class="role-suggestion" id="roleSuggestion" aria-hidden="true"></span>
+        </div>
+        <button type="submit" class="role-submit" aria-label="Continue">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </button>
+      </form>
+    </section>
+
+    <section class="services-search" id="servicesSearch">
+      <div class="services-inner">
+        <div class="search-bar">
+          <span class="search-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="11" cy="11" r="7" stroke-width="2"/>
+              <path d="M21 21l-4.35-4.35" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="search-text-wrap"><span id="searchText"></span><span class="search-cursor" id="searchCursor"></span></span>
+        </div>
+
+        <div class="results-feed" id="resultsFeed">
+          <div class="result-row">
+            <span class="result-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="4" width="16" height="3.2" rx="1.2"/>
+                <rect x="4" y="9" width="16" height="11" rx="1.6"/>
+              </svg>
+            </span>
+            <div class="result-text">
+              <p class="result-title">Premium Websites</p>
+              <p class="result-desc">Modern, premium websites designed specifically for your niche audience.</p>
+            </div>
+          </div>
+          <div class="result-row">
+            <span class="result-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 22s8-8.4 8-14a8 8 0 10-16 0c0 5.6 8 14 8 14zm0-11a3 3 0 100-6 3 3 0 000 6z"/>
+              </svg>
+            </span>
+            <div class="result-text">
+              <p class="result-title">Google Business Profile</p>
+              <p class="result-desc">Profile optimization to establish local credibility and authentic reviews that build trust.</p>
+            </div>
+          </div>
+          <div class="result-row">
+            <span class="result-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 3a7.5 7.5 0 105.06 13.04l4.2 4.2a1 1 0 001.41-1.41l-4.2-4.2A7.5 7.5 0 0010.5 3zm-5 7.5a5 5 0 1110 0 5 5 0 01-10 0z"/>
+              </svg>
+            </span>
+            <div class="result-text">
+              <p class="result-title">Search Engine Optimization</p>
+              <p class="result-desc">Helping high intent leads find you at the moment they want and need your service most.</p>
+            </div>
+          </div>
+          <div class="result-row">
+            <span class="result-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="14" width="3.6" height="6" rx="1"/>
+                <rect x="10.2" y="9" width="3.6" height="11" rx="1"/>
+                <rect x="16.4" y="4" width="3.6" height="16" rx="1"/>
+              </svg>
+            </span>
+            <div class="result-text">
+              <p class="result-title">Ongoing Growth Management</p>
+              <p class="result-desc">Monthly maintenance, updates, and support for your website, Google Business Profile, reviews, analytics, and SEO.</p>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="services-cta" id="servicesFreePreview">Free Preview</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>&copy; 2026 SLATES by ROQ</span>
+    <a href="mailto:hello@roqhome.com">hello@roqhome.com</a>
+  </footer>
+
+  <div class="modal-overlay" id="leadModalOverlay">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalIntro">
+      <button type="button" class="modal-close" id="leadModalClose" aria-label="Close">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <div id="modalFormState">
+        <p class="modal-intro" id="modalIntro">We want to add value to your business with no catch — even if you never hire us. Tell us more about your business so we can send you a free online evaluation and website preview.</p>
+
+        <form id="leadForm">
+          <div class="form-row">
+            <div class="field">
+              <label for="fName">Name</label>
+              <input type="text" id="fName" name="name" placeholder="Your name" required autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="fBusiness">Business name</label>
+              <input type="text" id="fBusiness" name="business" placeholder="Business name" required autocomplete="organization" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="fWhat">What you do</label>
+            <input type="text" id="fWhat" name="what_you_do" placeholder="e.g. real estate, construction, retail" required />
+          </div>
+
+          <div class="field">
+            <label for="fSite">Current website <span class="opt">(optional)</span></label>
+            <input type="text" id="fSite" name="current_website" placeholder="yourbusiness.com" />
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="fEmail">Email</label>
+              <input type="email" id="fEmail" name="email" placeholder="you@business.com" required autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="fPhone">Phone <span class="opt">(optional)</span></label>
+              <input type="tel" id="fPhone" name="phone" placeholder="(555) 555-5555" autocomplete="tel" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="fNotes">Anything else we should know? <span class="opt">(optional)</span></label>
+            <textarea id="fNotes" name="notes" placeholder="Tell us more"></textarea>
+          </div>
+
+          <button type="submit" class="modal-submit" id="leadSubmitBtn">Submit</button>
+          <p class="form-msg" id="leadFormMsg"></p>
+        </form>
+      </div>
+
+      <div class="modal-thanks" id="modalThanks">
+        <div class="thanks-mark">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 12.5L9.5 18L20 6" stroke="#F6F2E9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <p class="thanks-title">Thanks for the info!</p>
+        <p class="thanks-sub">We will reach out soon.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="ASSETS/SLATESOrb.js"></script>
+  <script>
+    SLATESOrb.create(document.getElementById('heroOrb'), { size: 96, color: '#141312' });
+  </script>
+  <script>
+    (function () {
+      const REDUCE_MOTION = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const section = document.getElementById('servicesSearch');
+      const searchTextEl = document.getElementById('searchText');
+      const cursorEl = document.getElementById('searchCursor');
+      const rows = Array.from(document.querySelectorAll('#resultsFeed .result-row'));
+      const query = 'How can SLATES help my business?';
+
+      function revealRows() {
+        rows.forEach((row, i) => {
+          setTimeout(() => row.classList.add('visible'), i * 220);
+        });
+      }
+
+      function typeQuery(onDone) {
+        let i = 0;
+        (function step() {
+          searchTextEl.textContent = query.slice(0, i);
+          if (i < query.length) {
+            i++;
+            setTimeout(step, 68);
+          } else {
+            cursorEl.style.opacity = '0';
+            setTimeout(onDone, 380);
+          }
+        })();
+      }
+
+      function start() {
+        if (REDUCE_MOTION) {
+          searchTextEl.textContent = query;
+          cursorEl.style.opacity = '0';
+          rows.forEach((row) => row.classList.add('visible'));
+          return;
+        }
+        typeQuery(revealRows);
+      }
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                start();
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.4 }
+        );
+        observer.observe(section);
+      } else {
+        start();
+      }
+    })();
+  </script>
+
+  <script>
+    (function () {
+      const words = ['Real Estate', 'Construction', 'Retail', 'Healthcare', 'Nonprofit'];
+      const input = document.getElementById('heroRoleInput');
+      const suggestion = document.getElementById('roleSuggestion');
+      let index = 0;
+      let timer = null;
+
+      function updateVisibility() {
+        suggestion.style.opacity = input.value ? '0' : '1';
+      }
+
+      function tick() {
+        suggestion.style.opacity = '0';
+        setTimeout(() => {
+          index = (index + 1) % words.length;
+          suggestion.textContent = words[index];
+          updateVisibility();
+        }, 250);
+      }
+
+      suggestion.textContent = words[0];
+      updateVisibility();
+      timer = setInterval(tick, 2200);
+
+      input.addEventListener('input', updateVisibility);
+
+      document.getElementById('heroRoleForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        window.SLATESLeadModal.open({ whatYouDo: input.value.trim() });
+      });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      const overlay = document.getElementById('leadModalOverlay');
+      const closeBtn = document.getElementById('leadModalClose');
+      const formState = document.getElementById('modalFormState');
+      const thanksState = document.getElementById('modalThanks');
+      const form = document.getElementById('leadForm');
+      const submitBtn = document.getElementById('leadSubmitBtn');
+      const formMsg = document.getElementById('leadFormMsg');
+      const fName = document.getElementById('fName');
+      const fWhat = document.getElementById('fWhat');
+
+      function openModal(opts) {
+        opts = opts || {};
+        form.reset();
+        formState.style.display = '';
+        thanksState.classList.remove('active');
+        formMsg.textContent = '';
+        formMsg.className = 'form-msg';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit';
+        if (opts.whatYouDo) fWhat.value = opts.whatYouDo;
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => fName.focus(), 260);
+      }
+
+      function closeModal() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      closeBtn.addEventListener('click', closeModal);
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && overlay.classList.contains('active')) closeModal();
+      });
+
+      document.getElementById('servicesFreePreview').addEventListener('click', () => openModal());
+
+      // Same Supabase project used by ROQ's waitlist / the existing SLATES
+      // landing page. Submissions land in the `slates_leads` table; a
+      // Database Webhook + Edge Function on that table forwards each new
+      // row to hello@roqhome.com via Resend.
+      const SUPABASE_URL = 'https://pgcospvlhorcvssafjoo.supabase.co';
+      const SUPABASE_ANON_KEY = 'sb_publishable_E8B6OF7rTmNhlEVvS36fiA_wewl5tER';
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const payload = {
+          name: document.getElementById('fName').value.trim(),
+          business: document.getElementById('fBusiness').value.trim(),
+          what_you_do: document.getElementById('fWhat').value.trim(),
+          current_website: document.getElementById('fSite').value.trim(),
+          email: document.getElementById('fEmail').value.trim(),
+          phone: document.getElementById('fPhone').value.trim(),
+          notes: document.getElementById('fNotes').value.trim(),
+        };
+
+        if (!payload.name || !payload.business || !payload.what_you_do || !payload.email) return;
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+        formMsg.textContent = '';
+        formMsg.className = 'form-msg';
+
+        const showThanks = () => {
+          formState.style.display = 'none';
+          thanksState.classList.add('active');
+        };
+
+        try {
+          const res = await fetch(`${SUPABASE_URL}/rest/v1/slates_leads`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              apikey: SUPABASE_ANON_KEY,
+              Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+              Prefer: 'return=minimal',
+            },
+            body: JSON.stringify(payload),
+          });
+
+          if (res.ok) {
+            showThanks();
+          } else {
+            throw new Error('Request failed');
+          }
+        } catch (err) {
+          formMsg.textContent = 'Something went wrong. Please try again.';
+          formMsg.className = 'form-msg error';
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit';
+        }
+      });
+
+      window.SLATESLeadModal = { open: openModal, close: closeModal };
+    })();
+  </script>
+
+  <script>
+    (function () {
+      const toggle = document.getElementById('navToggle');
+      const dropdown = document.getElementById('navDropdown');
+
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = dropdown.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!dropdown.contains(e.target) && e.target !== toggle) {
+          dropdown.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          dropdown.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
