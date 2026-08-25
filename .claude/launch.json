@@ -6,6 +6,13 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "8743"],
       "port": 8743
+    },
+    {
+      "name": "slates-os",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-c", "cd /Users/jaredkobernat/Desktop/SLATES/slates-os && exec npm run dev"],
+      "port": 3000,
+      "autoPort": true
     }
   ]
 }

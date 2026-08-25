@@ -942,12 +942,12 @@
 
       document.getElementById('servicesFreePreview').addEventListener('click', () => openModal());
 
-      // Same Supabase project used by ROQ's waitlist / the existing SLATES
-      // landing page. Submissions land in the `slates_leads` table; a
-      // Database Webhook + Edge Function on that table forwards each new
-      // row to hello@roqhome.com via Resend.
-      const SUPABASE_URL = 'https://pgcospvlhorcvssafjoo.supabase.co';
-      const SUPABASE_ANON_KEY = 'sb_publishable_E8B6OF7rTmNhlEVvS36fiA_wewl5tER';
+      // SLATES's own Supabase project (separate from ROQ's — SLATES OS is
+      // its own product now). Submissions go straight to the submit-lead
+      // Edge Function, which stores the lead and sends the notification
+      // email in one request — see slates-os/supabase/functions/submit-lead.
+      const SLATES_FUNCTIONS_URL = 'https://qzzjeqkgkkzjpvrdxmqn.supabase.co/functions/v1';
+      const SUPABASE_ANON_KEY = 'sb_publishable_NYd63Y42QtytX2aykoPiBA_hPibpvQb';
 
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -975,13 +975,12 @@
         };
 
         try {
-          const res = await fetch(`${SUPABASE_URL}/rest/v1/slates_leads`, {
+          const res = await fetch(`${SLATES_FUNCTIONS_URL}/submit-lead`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
               apikey: SUPABASE_ANON_KEY,
               Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-              Prefer: 'return=minimal',
             },
             body: JSON.stringify(payload),
           });
