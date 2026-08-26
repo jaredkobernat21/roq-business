@@ -5,7 +5,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         <div className="flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] bg-accent text-sm font-semibold text-accent-foreground">
           S
         </div>
-        <span className="text-lg font-semibold tracking-tight text-foreground">SLATES OS</span>
+        <span className="text-lg font-semibold tracking-tight text-foreground">ROQ Business</span>
       </div>
       <div className="w-full max-w-sm">{children}</div>
     </div>

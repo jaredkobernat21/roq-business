@@ -1,6 +1,6 @@
 # Architecture: building for one business mode, designing for several
 
-SLATES OS is being built first as a service-business platform (duct
+ROQ Business is being built first as a service-business platform (duct
 cleaning, detailing, landscaping, HVAC, plumbing, ...). It will not stay
 that way forever — the long-term product is meant to also serve
 restaurants/hospitality, software/SaaS, nonprofits, professional services,

@@ -61,7 +61,7 @@ Deno.serve(async (req) => {
     if (insertError) throw insertError;
 
     const emailBody = `
-      <h2>New SLATES inquiry</h2>
+      <h2>New ROQ Business inquiry</h2>
       <p><strong>Name:</strong> ${escapeHtml(record.name)}</p>
       <p><strong>Business:</strong> ${escapeHtml(record.business)}</p>
       <p><strong>What they do:</strong> ${escapeHtml(record.what_you_do)}</p>
@@ -78,9 +78,9 @@ Deno.serve(async (req) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: Deno.env.get("LEAD_EMAIL_FROM") ?? "SLATES <notifications@roqhome.com>",
+        from: Deno.env.get("LEAD_EMAIL_FROM") ?? "ROQ Business <notifications@roqhome.com>",
         to: [Deno.env.get("LEAD_EMAIL_TO") ?? "hello@slatesweb.com"],
-        subject: `New SLATES inquiry: ${record.business}`,
+        subject: `New ROQ Business inquiry: ${record.business}`,
         html: emailBody,
       }),
     });

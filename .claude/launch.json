@@ -2,13 +2,13 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "slates-site",
+      "name": "roq-business-site",
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "8743"],
       "port": 8743
     },
     {
-      "name": "slates-os",
+      "name": "roq-business",
       "runtimeExecutable": "bash",
       "runtimeArgs": ["-c", "cd /Users/jaredkobernat/Desktop/SLATES/slates-os && exec npm run dev"],
       "port": 3000,

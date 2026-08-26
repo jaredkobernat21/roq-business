@@ -12,8 +12,8 @@
 </script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SLATES — Reshaping First Impressions</title>
-<meta name="description" content="SLATES — reshaping first impressions. Your community deserves to find, trust, and contact you — all in the first 10 seconds." />
+<title>ROQ Business — Reshaping First Impressions</title>
+<meta name="description" content="ROQ Business — reshaping first impressions. Your community deserves to find, trust, and contact you — all in the first 10 seconds." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -55,8 +55,10 @@
 
   .logotype {
     display: block;
-    height: clamp(20px, 2.6vw, 26px);
-    width: auto;
+    font-weight: 700;
+    font-size: clamp(16px, 2.2vw, 20px);
+    letter-spacing: -0.01em;
+    color: var(--charcoal);
   }
 
   .nav-menu {
@@ -632,8 +634,8 @@
 <body>
 
   <header>
-    <a href="index.html" aria-label="SLATES home">
-      <img class="logotype" src="ASSETS/slates-logo.png" alt="SLATES" />
+    <a href="index.html" aria-label="ROQ Business home">
+      <span class="logotype">ROQ Business</span>
     </a>
     <div class="nav-menu">
       <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
@@ -736,7 +738,7 @@
   </main>
 
   <footer>
-    <span>&copy; 2026 SLATES by ROQ</span>
+    <span>&copy; 2026 ROQ Business</span>
     <a href="mailto:hello@slatesweb.com">hello@slatesweb.com</a>
   </footer>
 
@@ -806,9 +808,9 @@
     </div>
   </div>
 
-  <script src="ASSETS/SLATESOrb.js"></script>
+  <script src="ASSETS/ROQBusinessOrb.js"></script>
   <script>
-    SLATESOrb.create(document.getElementById('heroOrb'), { size: 96, color: '#141312' });
+    ROQBusinessOrb.create(document.getElementById('heroOrb'), { size: 96, color: '#141312' });
   </script>
   <script>
     (function () {
@@ -817,7 +819,7 @@
       const searchTextEl = document.getElementById('searchText');
       const cursorEl = document.getElementById('searchCursor');
       const rows = Array.from(document.querySelectorAll('#resultsFeed .result-row'));
-      const query = 'How can SLATES help my business?';
+      const query = 'How can ROQ Business help my business?';
 
       function revealRows() {
         rows.forEach((row, i) => {
@@ -897,7 +899,7 @@
 
       document.getElementById('heroRoleForm').addEventListener('submit', (e) => {
         e.preventDefault();
-        window.SLATESLeadModal.open({ whatYouDo: input.value.trim() });
+        window.ROQBusinessLeadModal.open({ whatYouDo: input.value.trim() });
       });
     })();
   </script>
@@ -944,11 +946,11 @@
 
       document.getElementById('servicesFreePreview').addEventListener('click', () => openModal());
 
-      // SLATES's own Supabase project (separate from ROQ's — SLATES OS is
-      // its own product now). Submissions go straight to the submit-lead
+      // ROQ Business's own Supabase project (separate from other ROQ
+      // products). Submissions go straight to the submit-lead
       // Edge Function, which stores the lead and sends the notification
       // email in one request — see slates-os/supabase/functions/submit-lead.
-      const SLATES_FUNCTIONS_URL = 'https://qzzjeqkgkkzjpvrdxmqn.supabase.co/functions/v1';
+      const ROQ_BUSINESS_FUNCTIONS_URL = 'https://qzzjeqkgkkzjpvrdxmqn.supabase.co/functions/v1';
       const SUPABASE_ANON_KEY = 'sb_publishable_NYd63Y42QtytX2aykoPiBA_hPibpvQb';
 
       form.addEventListener('submit', async (e) => {
@@ -977,7 +979,7 @@
         };
 
         try {
-          const res = await fetch(`${SLATES_FUNCTIONS_URL}/submit-lead`, {
+          const res = await fetch(`${ROQ_BUSINESS_FUNCTIONS_URL}/submit-lead`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -1001,7 +1003,7 @@
         }
       });
 
-      window.SLATESLeadModal = { open: openModal, close: closeModal };
+      window.ROQBusinessLeadModal = { open: openModal, close: closeModal };
     })();
   </script>
 

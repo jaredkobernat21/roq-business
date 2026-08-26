@@ -9,7 +9,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "SLATES OS",
+  title: "ROQ Business",
   description: "The operating system for local service businesses.",
 };
 

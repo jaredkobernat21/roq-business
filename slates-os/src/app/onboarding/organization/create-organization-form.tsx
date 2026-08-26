@@ -33,7 +33,7 @@ export function CreateOrganizationForm() {
       </div>
 
       <Button type="submit" disabled={pending} className="w-full">
-        {pending ? "Creating…" : "Create business & enter SLATES OS"}
+        {pending ? "Creating…" : "Create business & enter ROQ Business"}
       </Button>
     </form>
   );

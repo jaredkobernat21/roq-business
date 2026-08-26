@@ -1,4 +1,4 @@
-// SLATESOrb — ported from ROQ's RoqOrb.js (React Native) to vanilla DOM/WAAPI.
+// ROQBusinessOrb — ported from ROQ's RoqOrb.js (React Native) to vanilla DOM/WAAPI.
 // Same particle field, breathing, rotation, and shimmer as the ROQ app mark —
 // no glow/halo layer, fully transparent, just the living particles themselves.
 (function () {
@@ -84,5 +84,5 @@
     }
   }
 
-  window.SLATESOrb = { create: createOrb };
+  window.ROQBusinessOrb = { create: createOrb };
 })();

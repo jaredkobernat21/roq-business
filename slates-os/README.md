@@ -1,4 +1,4 @@
-# SLATES OS
+# ROQ Business
 
 The reusable multi-tenant operating system for local service businesses
 (duct cleaning, detailing, landscaping, HVAC, plumbing, and similar
@@ -178,7 +178,7 @@ Redirect URLs) so email links resolve correctly.
   operations are RPCs instead of table policies, and how to test isolation
   once you have a database to test against.
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — **read this before
-  building Phase 2+.** SLATES OS is being built for service businesses
+  building Phase 2+.** ROQ Business is being built for service businesses
   first, but is meant to eventually support other business modes
   (restaurants, SaaS, nonprofits, ...) without rebuilding the core. This
   doc records what stays generic (customers, workflows, scheduling,
