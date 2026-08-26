@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --surface: #ffffff;
+  --surface-muted: #f7f5f0;
+  --surface-hover: #f0ede5;
+  --border: rgba(35, 33, 32, 0.1);
+  --border-strong: rgba(35, 33, 32, 0.16);
+  --foreground: #232120;
+  --foreground-muted: #6e685f;
+  --foreground-faint: #9a9488;
+  --accent: #232120;
+  --accent-foreground: #ffffff;
+  --success: #2f6b4f;
+  --success-bg: #e9f2ec;
+  --warning: #a15c1f;
+  --warning-bg: #faf0e3;
+  --danger: #b3402f;
+  --danger-bg: #fbeae7;
+  --focus-ring: rgba(35, 33, 32, 0.35);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-foreground-faint: var(--foreground-faint);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-success: var(--success);
+  --color-success-bg: var(--success-bg);
+  --color-warning: var(--warning);
+  --color-warning-bg: var(--warning-bg);
+  --color-danger: var(--danger);
+  --color-danger-bg: var(--danger-bg);
+  --font-sans: var(--font-inter);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #181715;
+    --surface: #201f1c;
+    --surface-muted: #262420;
+    --surface-hover: #2c2a25;
+    --border: rgba(255, 255, 255, 0.09);
+    --border-strong: rgba(255, 255, 255, 0.16);
+    --foreground: #f3f1ec;
+    --foreground-muted: #a9a296;
+    --foreground-faint: #7d766a;
+    --accent: #f3f1ec;
+    --accent-foreground: #181715;
+    --success: #6fbf95;
+    --success-bg: #1e2c24;
+    --warning: #e0a565;
+    --warning-bg: #2e2417;
+    --danger: #e5897a;
+    --danger-bg: #2e1f1c;
+    --focus-ring: rgba(243, 241, 236, 0.35);
+  }
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  color-scheme: light dark;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
