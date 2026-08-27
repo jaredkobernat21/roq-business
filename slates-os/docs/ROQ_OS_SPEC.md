@@ -75,3 +75,77 @@ switcher, Home-Mode-specific schema, or other-Mode dashboards speculatively
   with Home Mode itself once that exists).
 - `src/components/app-shell/pill-tabs.tsx` renders the three universal
   tabs; `src/lib/nav.ts`'s `TOP_NAV` is the source of which three they are.
+
+## Deferred work
+
+Standing list of things that are known, decided, and *not* done. Each was
+deferred on purpose — none of these is an oversight, and none should be
+started speculatively. Last reviewed 2026-08-27.
+
+### Waiting on a real customer
+
+Feature work paused until a first customer is signed. The reasoning: an
+integration designed against a hypothetical customer is usually designed
+wrong, and the schema seam already exists to add one later cheaply.
+
+- **Stripe production setup.** The integration is built and works in test
+  mode. Going live needs live API keys, a `STRIPE_CONNECT_CLIENT_ID`, and an
+  approved Connect application — all account-level decisions. The Connect
+  handshake and webhook were hardened separately and are not blocking.
+- **A second payment processor** (Square, PayPal, whatever customers ask
+  for). `payment_connections` is keyed on `(organization_id, provider)` and
+  `payment_provider` is an enum, so a second processor is an enum value plus
+  a provider module — not a schema rewrite. What is currently Stripe-shaped:
+  `get_invoice_stripe_account`, `checkout.ts`'s direct SDK calls, the
+  `/api/stripe/*` routes, and the single hardcoded card in the integrations
+  UI. Generalize when there is a second real example to generalize *against*.
+- **QuickBooks.** Currently a "Coming soon" badge with nothing behind it.
+  Note this is a different axis from payments — accounting sync via Intuit
+  OAuth — and wants its own table rather than a `payment_connections` row.
+
+### Invoice email
+
+**Sending an invoice does not email anyone.** `markInvoiceSentAction` flips
+`status` to `sent` and stamps `sent_at`; the business is expected to copy the
+public `/invoice/[id]` link and send it themselves. This is the largest gap
+for anyone testing the app as a real workflow.
+
+Building it is well-supported: Resend is already the provider, and
+`supabase/functions/send-invite-email` is a working pattern to copy —
+including that it is invoked directly from a Server Action rather than via a
+DB webhook, because this project has neither `pg_net` nor the
+`supabase_functions` schema enabled. See `docs/EMAIL.md`.
+
+Related and smaller: six of the nine Auth email templates are still plain
+unstyled HTML living only in the dashboard, unversioned and visually
+inconsistent with the two that were brought into `supabase/templates/`.
+
+### Naming and infrastructure renames
+
+The app's user-facing branding is fully ROQ OS. What remains are *container*
+names, deferred because they are account/filesystem changes rather than code:
+
+- **The organization named "SLATES" in the live database.** This is data, not
+  code, and it is the most visible remaining one — it appears in team invite
+  emails ("You've been invited to join SLATES on ROQ OS"). Renameable in
+  Settings, no deploy required. Do this one first.
+- **GitHub repo `roq-business`** → `roq-os`. Low risk; GitHub redirects the
+  old URL, and the local remote needs updating afterward.
+- **Supabase project display name**, still literally "slates-os". Dashboard
+  label only — the project ref and every connection string are unaffected.
+- **Local folder `slates-os/`** → `roq-os/`. Carries a trap: Vercel's project
+  Root Directory setting points at this path, so the rename and that setting
+  have to move together or deploys break.
+
+**`/Users/jaredkobernat/Desktop/SLATES/` itself should keep its name.** That
+folder is the git repo root *and* the source of the separate, still-deployed
+slatesweb.com static site. The name is accurate, and renaming it would imply
+that site is a ROQ property when it isn't.
+
+Likewise not stale branding, despite the name: the `slates_leads` table and
+the `submit-lead` Edge Function are live infrastructure for that same
+marketing site, and `config.toml`'s `app.slatesweb.com` redirect URLs are
+kept intentionally so already-sent auth email links keep resolving during the
+domain transition. Comments inside already-applied migrations are left alone
+because editing them risks a checksum mismatch against the live project for
+no functional gain.
