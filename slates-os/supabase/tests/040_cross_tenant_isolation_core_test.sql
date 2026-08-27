@@ -7,6 +7,11 @@
 -- that this is a requirement, not an implementation detail: "never
 -- organization B's data, and never an error that leaks whether the row
 -- exists").
+--
+-- A data-modifying CTE must be the top-level statement in Postgres — it
+-- can't be nested inside a subquery passed as an argument to is() — so
+-- every update/delete assertion below is `WITH ... SELECT is(...)`, not
+-- `SELECT is((WITH ...))`.
 
 BEGIN;
 SELECT plan(12);
@@ -48,10 +53,11 @@ SELECT is(
   0::bigint,
   'cannot select org B''s organization row'
 );
+WITH updated AS (
+  UPDATE public.organizations SET name = 'hacked' WHERE id = '0b000000-0000-0000-0000-000000000301' RETURNING 1
+)
 SELECT is(
-  (WITH updated AS (
-     UPDATE public.organizations SET name = 'hacked' WHERE id = '0b000000-0000-0000-0000-000000000301' RETURNING 1
-   ) SELECT count(*) FROM updated),
+  (SELECT count(*) FROM updated),
   0::bigint,
   'cannot update org B''s organization row (no error, zero rows)'
 );
@@ -62,11 +68,12 @@ SELECT is(
   0::bigint,
   'cannot select org B''s membership rows'
 );
+WITH updated AS (
+  UPDATE public.organization_members SET role = 'admin'
+  WHERE organization_id = '0b000000-0000-0000-0000-000000000301' RETURNING 1
+)
 SELECT is(
-  (WITH updated AS (
-     UPDATE public.organization_members SET role = 'admin'
-     WHERE organization_id = '0b000000-0000-0000-0000-000000000301' RETURNING 1
-   ) SELECT count(*) FROM updated),
+  (SELECT count(*) FROM updated),
   0::bigint,
   'cannot update org B''s membership rows (no error, zero rows)'
 );
@@ -77,17 +84,19 @@ SELECT is(
   0::bigint,
   'cannot select org B''s customer'
 );
+WITH updated AS (
+  UPDATE public.customers SET first_name = 'hacked' WHERE id = '40000000-0000-0000-0000-000000000301' RETURNING 1
+)
 SELECT is(
-  (WITH updated AS (
-     UPDATE public.customers SET first_name = 'hacked' WHERE id = '40000000-0000-0000-0000-000000000301' RETURNING 1
-   ) SELECT count(*) FROM updated),
+  (SELECT count(*) FROM updated),
   0::bigint,
   'cannot update org B''s customer (no error, zero rows)'
 );
+WITH deleted AS (
+  DELETE FROM public.customers WHERE id = '40000000-0000-0000-0000-000000000301' RETURNING 1
+)
 SELECT is(
-  (WITH deleted AS (
-     DELETE FROM public.customers WHERE id = '40000000-0000-0000-0000-000000000301' RETURNING 1
-   ) SELECT count(*) FROM deleted),
+  (SELECT count(*) FROM deleted),
   0::bigint,
   'cannot delete org B''s customer (no error, zero rows)'
 );
@@ -98,17 +107,19 @@ SELECT is(
   0::bigint,
   'cannot select org B''s job'
 );
+WITH updated AS (
+  UPDATE public.jobs SET title = 'hacked' WHERE id = '40000000-0000-0000-0000-000000000302' RETURNING 1
+)
 SELECT is(
-  (WITH updated AS (
-     UPDATE public.jobs SET title = 'hacked' WHERE id = '40000000-0000-0000-0000-000000000302' RETURNING 1
-   ) SELECT count(*) FROM updated),
+  (SELECT count(*) FROM updated),
   0::bigint,
   'cannot update org B''s job (no error, zero rows)'
 );
+WITH deleted AS (
+  DELETE FROM public.jobs WHERE id = '40000000-0000-0000-0000-000000000302' RETURNING 1
+)
 SELECT is(
-  (WITH deleted AS (
-     DELETE FROM public.jobs WHERE id = '40000000-0000-0000-0000-000000000302' RETURNING 1
-   ) SELECT count(*) FROM deleted),
+  (SELECT count(*) FROM deleted),
   0::bigint,
   'cannot delete org B''s job (no error, zero rows)'
 );
@@ -119,10 +130,11 @@ SELECT is(
   0::bigint,
   'cannot select org B''s invoice'
 );
+WITH updated AS (
+  UPDATE public.invoices SET notes = 'hacked' WHERE id = '40000000-0000-0000-0000-000000000303' RETURNING 1
+)
 SELECT is(
-  (WITH updated AS (
-     UPDATE public.invoices SET notes = 'hacked' WHERE id = '40000000-0000-0000-0000-000000000303' RETURNING 1
-   ) SELECT count(*) FROM updated),
+  (SELECT count(*) FROM updated),
   0::bigint,
   'cannot update org B''s invoice (no error, zero rows)'
 );

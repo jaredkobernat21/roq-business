@@ -49,10 +49,11 @@ SELECT throws_ok(
 insert into public.organization_members (id, organization_id, user_id, role, status) values
   ('30000000-0000-0000-0000-000000000204', '0d000000-0000-0000-0000-000000000201', 'a0000000-0000-0000-0000-000000000204', 'owner', 'active');
 
+WITH deleted AS (
+  DELETE FROM public.organization_members WHERE id = '30000000-0000-0000-0000-000000000203' RETURNING 1
+)
 SELECT is(
-  (WITH deleted AS (
-     DELETE FROM public.organization_members WHERE id = '30000000-0000-0000-0000-000000000203' RETURNING 1
-   ) SELECT count(*) FROM deleted),
+  (SELECT count(*) FROM deleted),
   1::bigint,
   'deleting one of two active owners succeeds'
 );
@@ -87,11 +88,12 @@ insert into public.organization_members (id, organization_id, user_id, role, sta
 set local role authenticated;
 select set_config('request.jwt.claims', json_build_object('sub', 'a0000000-0000-0000-0000-000000000201'::text, 'email', 'owner-c@rls-test.local', 'role', 'authenticated')::text, true);
 
+WITH updated AS (
+  UPDATE public.organization_members SET role = 'admin'
+  WHERE id = '30000000-0000-0000-0000-000000000201' RETURNING 1
+)
 SELECT is(
-  (WITH updated AS (
-     UPDATE public.organization_members SET role = 'admin'
-     WHERE id = '30000000-0000-0000-0000-000000000201' RETURNING 1
-   ) SELECT count(*) FROM updated),
+  (SELECT count(*) FROM updated),
   1::bigint,
   'an owner can demote themselves once a second active owner exists'
 );

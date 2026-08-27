@@ -43,34 +43,40 @@ insert into public.organization_members (id, organization_id, user_id, role, sta
 set local role authenticated;
 
 -- As owner: can update a non-owner member's role.
+-- (A data-modifying CTE must be the top-level statement in Postgres — it
+-- can't be nested inside a subquery passed as an argument to is() — so
+-- each of these is `WITH ... SELECT is(...)`, not `SELECT is((WITH ...))`.)
 select set_config('request.jwt.claims', json_build_object('sub', 'a0000000-0000-0000-0000-000000000101'::text, 'email', 'owner-a@rls-test.local', 'role', 'authenticated')::text, true);
+WITH updated AS (
+  UPDATE public.organization_members SET role = 'technician'
+  WHERE id = '30000000-0000-0000-0000-000000000104' RETURNING 1
+)
 SELECT is(
-  (WITH updated AS (
-     UPDATE public.organization_members SET role = 'technician'
-     WHERE id = '30000000-0000-0000-0000-000000000104' RETURNING 1
-   ) SELECT count(*) FROM updated),
+  (SELECT count(*) FROM updated),
   1::bigint,
   'owner can update a non-owner member''s role'
 );
 
 -- As admin: can update a non-owner member's role.
 select set_config('request.jwt.claims', json_build_object('sub', 'a0000000-0000-0000-0000-000000000103'::text, 'email', 'admin-a@rls-test.local', 'role', 'authenticated')::text, true);
+WITH updated AS (
+  UPDATE public.organization_members SET role = 'scheduler'
+  WHERE id = '30000000-0000-0000-0000-000000000105' RETURNING 1
+)
 SELECT is(
-  (WITH updated AS (
-     UPDATE public.organization_members SET role = 'scheduler'
-     WHERE id = '30000000-0000-0000-0000-000000000105' RETURNING 1
-   ) SELECT count(*) FROM updated),
+  (SELECT count(*) FROM updated),
   1::bigint,
   'admin can update a non-owner member''s role'
 );
 
 -- As admin: cannot touch a row that is currently 'owner' — silently
 -- excluded by USING, zero rows, no error.
+WITH updated AS (
+  UPDATE public.organization_members SET role = 'admin'
+  WHERE id = '30000000-0000-0000-0000-000000000101' RETURNING 1
+)
 SELECT is(
-  (WITH updated AS (
-     UPDATE public.organization_members SET role = 'admin'
-     WHERE id = '30000000-0000-0000-0000-000000000101' RETURNING 1
-   ) SELECT count(*) FROM updated),
+  (SELECT count(*) FROM updated),
   0::bigint,
   'admin cannot update the owner row (silently excluded, not an error)'
 );
@@ -86,21 +92,23 @@ SELECT throws_ok(
 
 -- As owner: can update another owner's row.
 select set_config('request.jwt.claims', json_build_object('sub', 'a0000000-0000-0000-0000-000000000101'::text, 'email', 'owner-a@rls-test.local', 'role', 'authenticated')::text, true);
+WITH updated AS (
+  UPDATE public.organization_members SET role = 'admin'
+  WHERE id = '30000000-0000-0000-0000-000000000102' RETURNING 1
+)
 SELECT is(
-  (WITH updated AS (
-     UPDATE public.organization_members SET role = 'admin'
-     WHERE id = '30000000-0000-0000-0000-000000000102' RETURNING 1
-   ) SELECT count(*) FROM updated),
+  (SELECT count(*) FROM updated),
   1::bigint,
   'owner can update another owner''s row'
 );
 
 -- As owner: can grant the owner role.
+WITH updated AS (
+  UPDATE public.organization_members SET role = 'owner'
+  WHERE id = '30000000-0000-0000-0000-000000000103' RETURNING 1
+)
 SELECT is(
-  (WITH updated AS (
-     UPDATE public.organization_members SET role = 'owner'
-     WHERE id = '30000000-0000-0000-0000-000000000103' RETURNING 1
-   ) SELECT count(*) FROM updated),
+  (SELECT count(*) FROM updated),
   1::bigint,
   'owner can grant the owner role to another member'
 );

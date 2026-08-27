@@ -5,6 +5,11 @@
 -- src/lib/permissions.ts) and DB-layer enforcement need to agree: a
 -- technician may update only the job assigned to them; staff (scheduler and
 -- above) may update any job in their organization regardless of assignment.
+--
+-- A data-modifying CTE must be the top-level statement in Postgres — it
+-- can't be nested inside a subquery passed as an argument to is() — so
+-- every assertion below is `WITH ... SELECT is(...)`, not
+-- `SELECT is((WITH ...))`.
 
 BEGIN;
 SELECT plan(5);
@@ -40,28 +45,31 @@ set local role authenticated;
 
 -- Technician 1: can update the job assigned to them.
 select set_config('request.jwt.claims', json_build_object('sub', 'a0000000-0000-0000-0000-000000000403'::text, 'email', 'tech1-a@rls-test.local', 'role', 'authenticated')::text, true);
+WITH updated AS (
+  UPDATE public.jobs SET status = 'in_progress' WHERE id = '40000000-0000-0000-0000-000000000402' RETURNING 1
+)
 SELECT is(
-  (WITH updated AS (
-     UPDATE public.jobs SET status = 'in_progress' WHERE id = '40000000-0000-0000-0000-000000000402' RETURNING 1
-   ) SELECT count(*) FROM updated),
+  (SELECT count(*) FROM updated),
   1::bigint,
   'a technician can update the job assigned to them'
 );
 
 -- Technician 1: cannot update a job assigned to technician 2.
+WITH updated AS (
+  UPDATE public.jobs SET status = 'in_progress' WHERE id = '40000000-0000-0000-0000-000000000403' RETURNING 1
+)
 SELECT is(
-  (WITH updated AS (
-     UPDATE public.jobs SET status = 'in_progress' WHERE id = '40000000-0000-0000-0000-000000000403' RETURNING 1
-   ) SELECT count(*) FROM updated),
+  (SELECT count(*) FROM updated),
   0::bigint,
   'a technician cannot update a job assigned to someone else (no error, zero rows)'
 );
 
 -- Technician 1: cannot update an unassigned job.
+WITH updated AS (
+  UPDATE public.jobs SET status = 'in_progress' WHERE id = '40000000-0000-0000-0000-000000000404' RETURNING 1
+)
 SELECT is(
-  (WITH updated AS (
-     UPDATE public.jobs SET status = 'in_progress' WHERE id = '40000000-0000-0000-0000-000000000404' RETURNING 1
-   ) SELECT count(*) FROM updated),
+  (SELECT count(*) FROM updated),
   0::bigint,
   'a technician cannot update an unassigned job (no error, zero rows)'
 );
@@ -69,20 +77,22 @@ SELECT is(
 -- Scheduler: can update a job assigned to someone else — staff aren't
 -- bound by the assignment check at all.
 select set_config('request.jwt.claims', json_build_object('sub', 'a0000000-0000-0000-0000-000000000402'::text, 'email', 'scheduler-a@rls-test.local', 'role', 'authenticated')::text, true);
+WITH updated AS (
+  UPDATE public.jobs SET status = 'in_progress' WHERE id = '40000000-0000-0000-0000-000000000403' RETURNING 1
+)
 SELECT is(
-  (WITH updated AS (
-     UPDATE public.jobs SET status = 'in_progress' WHERE id = '40000000-0000-0000-0000-000000000403' RETURNING 1
-   ) SELECT count(*) FROM updated),
+  (SELECT count(*) FROM updated),
   1::bigint,
   'a scheduler can update a job assigned to someone else'
 );
 
 -- Owner: can update an unassigned job too.
 select set_config('request.jwt.claims', json_build_object('sub', 'a0000000-0000-0000-0000-000000000401'::text, 'email', 'owner-a@rls-test.local', 'role', 'authenticated')::text, true);
+WITH updated AS (
+  UPDATE public.jobs SET status = 'in_progress' WHERE id = '40000000-0000-0000-0000-000000000404' RETURNING 1
+)
 SELECT is(
-  (WITH updated AS (
-     UPDATE public.jobs SET status = 'in_progress' WHERE id = '40000000-0000-0000-0000-000000000404' RETURNING 1
-   ) SELECT count(*) FROM updated),
+  (SELECT count(*) FROM updated),
   1::bigint,
   'an owner can update an unassigned job'
 );
