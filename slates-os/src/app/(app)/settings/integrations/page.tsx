@@ -2,7 +2,7 @@ import Link from "next/link";
 import { getCurrentOrgContext } from "@/lib/session";
 import { createClient } from "@/lib/supabase/server";
 import { canManagePaymentConnections } from "@/lib/permissions";
-import { getStripeConnectAuthorizeUrl, isStripeConfigured } from "@/lib/stripe/connect";
+import { isStripeConfigured } from "@/lib/stripe/connect";
 import { disconnectStripeAction } from "@/lib/payments/actions";
 import { Card, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -29,7 +29,6 @@ export default async function IntegrationsPage({
   const canManage = canManagePaymentConnections(context.role);
   const isConnected = connection?.status === "connected";
   const configured = isStripeConfigured();
-  const authorizeUrl = configured ? getStripeConnectAuthorizeUrl(context.organization.id) : null;
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
@@ -71,11 +70,14 @@ export default async function IntegrationsPage({
                 Disconnect
               </Button>
             </form>
-          ) : authorizeUrl ? (
-            <a href={authorizeUrl}>
+          ) : (
+            // Goes through our own route, not straight to Stripe: the route
+            // mints the single-use OAuth state and puts it in an httpOnly
+            // cookie before redirecting. See /api/stripe/connect.
+            <a href="/api/stripe/connect">
               <Button size="sm">Connect Stripe</Button>
             </a>
-          ) : null}
+          )}
         </div>
       </Card>
 
