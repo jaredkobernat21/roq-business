@@ -109,10 +109,14 @@ not as the actual security boundary.
 ## Testing tenant isolation
 
 An automated pgTAP suite lives at `supabase/tests/*_test.sql` and runs on
-every push/PR via `.github/workflows/database-tests.yml` (no secrets
-needed — it runs entirely against an ephemeral container Postgres GitHub's
-runner provides, never either of the live hosted Supabase projects). Run it
-yourself with:
+every push/PR that touches this directory, via
+`../.github/workflows/database-tests.yml` — that workflow file has to live
+at the repo root (this directory's parent), not here, because GitHub
+Actions only discovers workflows at the true repo root; the repo root
+itself is the separate slatesweb.com static site, with this Next.js/Supabase
+project as a subdirectory. No secrets needed — it runs entirely against an
+ephemeral container Postgres GitHub's runner provides, never either of the
+live hosted Supabase projects. Run it yourself with:
 
 ```bash
 supabase db start   # or `supabase start` if that turns out not to be enough

@@ -1,19 +1,34 @@
 name: database-tests
 
-# Runs the pgTAP RLS/tenant-isolation suite (supabase/tests/*_test.sql)
+# Runs the pgTAP RLS/tenant-isolation suite (slates-os/supabase/tests/*_test.sql)
 # against an ephemeral Postgres container that GitHub's own runner spins up
 # via Docker — this workflow never touches either of the live hosted
 # Supabase projects on the account, and needs no secrets at all.
 #
-# See docs/RLS.md for what these tests cover and why.
+# This file must live at the repo root's .github/workflows/ (GitHub Actions
+# doesn't discover workflows anywhere else), even though the actual
+# Supabase/Next.js project it tests — slates-os/ — is a subdirectory; this
+# repo root is a separate static site (slatesweb.com). Every command below
+# runs with working-directory: slates-os for that reason, and the trigger is
+# scoped to only fire on changes under slates-os/ so unrelated marketing-site
+# commits don't spin up a Postgres container for nothing.
+#
+# See slates-os/docs/RLS.md for what these tests cover and why.
 
 on:
   push:
+    paths:
+      - "slates-os/**"
   pull_request:
+    paths:
+      - "slates-os/**"
 
 jobs:
   rls-tests:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: slates-os
     steps:
       - uses: actions/checkout@v4
 
