@@ -84,9 +84,14 @@ SELECT is(
 -- As admin: cannot promote anyone to 'owner' — the row matches USING (it's
 -- not currently an owner row) but the new state fails WITH CHECK, which
 -- raises rather than silently skipping.
+-- pgTAP's 3-arg throws_ok(sql, errcode, X) treats X as the expected error
+-- MESSAGE, not a free-text description (confirmed against CI's first real
+-- run) — same 4-arg shape file 030's throws_ok calls already use
+-- successfully: (sql, errcode, errmsg, description).
 SELECT throws_ok(
   $$ UPDATE public.organization_members SET role = 'owner' WHERE id = '30000000-0000-0000-0000-000000000105' $$,
   '42501',
+  'new row violates row-level security policy for table "organization_members"',
   'admin cannot promote a member to owner (RLS policy violation)'
 );
 
