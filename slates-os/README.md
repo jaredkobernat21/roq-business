@@ -188,6 +188,10 @@ Redirect URLs) so email links resolve correctly.
   is enforced, the recursion problem and how it's avoided, why some
   operations are RPCs instead of table policies, and how to test isolation
   once you have a database to test against.
+- [`docs/EMAIL.md`](docs/EMAIL.md) — how mail is sent: the two independent
+  paths (Supabase Auth over Resend SMTP vs. the app calling Resend's API
+  directly), where the API key lives for each, and how to push an SMTP
+  config change without committing a secret.
 
 ## Explicitly not in Phase 1
 

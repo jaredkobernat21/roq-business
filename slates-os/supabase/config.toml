@@ -207,7 +207,12 @@ password_requirements = ""
 
 [auth.rate_limit]
 # Number of emails that can be sent per hour. Requires auth.email.smtp to be enabled.
-email_sent = 2
+# 2/hour is the cap that applies to Supabase's default mailer. Now that Auth
+# goes through Resend (see [auth.email.smtp]), this is raised to Supabase's
+# recommended value for a custom SMTP provider. Kept at 30 rather than higher so
+# a bug or abusive signup loop can't burn through the Resend sending quota in an
+# hour.
+email_sent = 30
 # Number of SMS messages that can be sent per hour. Requires auth.sms to be enabled.
 sms_sent = 30
 # Number of anonymous sign-ins that can be made per hour per IP address. Requires enable_anonymous_sign_ins = true.
@@ -244,15 +249,24 @@ otp_length = 8
 # Number of seconds before the email OTP expires (defaults to 1 hour).
 otp_expiry = 3600
 
-# Use a production-ready SMTP server
-# [auth.email.smtp]
-# enabled = true
-# host = "smtp.sendgrid.net"
-# port = 587
-# user = "apikey"
-# pass = "env(SENDGRID_API_KEY)"
-# admin_email = "admin@email.com"
-# sender_name = "Admin"
+# Production SMTP for Auth emails (signup confirmation, password reset, email
+# change). Without this, Auth falls back to Supabase's default mailer, which is
+# rate-limited hard enough that real signups start silently failing.
+#
+# Resend is used because this project already sends team invites through it
+# (see supabase/functions/send-invite-email), so roqhome.com is an
+# already-verified sending domain there and Auth mail inherits its reputation.
+#
+# DO NOT commit the API key. It is substituted from the environment at
+# `supabase config push` time — see docs/EMAIL.md for the push command.
+[auth.email.smtp]
+enabled = true
+host = "smtp.resend.com"
+port = 465
+user = "resend"
+pass = "env(RESEND_SMTP_PASSWORD)"
+admin_email = "no-reply@roqhome.com"
+sender_name = "ROQ OS"
 
 # Uncomment to customize email template
 # [auth.email.template.invite]
