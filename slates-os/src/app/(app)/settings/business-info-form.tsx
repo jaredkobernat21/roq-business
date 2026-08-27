@@ -3,7 +3,7 @@
 import { useActionState } from "react";
 import { updateOrganizationAction, type FormActionState } from "@/lib/organizations/actions";
 import { Button } from "@/components/ui/button";
-import { Input, Label, Select } from "@/components/ui/input";
+import { Input, Label, Select, Textarea } from "@/components/ui/input";
 import { Alert } from "@/components/ui/alert";
 import { TIMEZONES } from "@/lib/timezones";
 import type { Database } from "@/lib/database.types";
@@ -71,6 +71,67 @@ export function BusinessInfoForm({
               </option>
             ))}
           </Select>
+        </div>
+      </div>
+
+      <div>
+        <Label htmlFor="address">Address</Label>
+        <Input
+          id="address"
+          name="address"
+          placeholder="123 Main St, Springfield, IL"
+          defaultValue={organization.address ?? ""}
+          disabled={readOnly}
+        />
+      </div>
+
+      <div className="border-t border-border pt-4">
+        <p className="text-sm font-medium text-foreground">Booking page branding</p>
+        <p className="mt-1 text-xs text-foreground-muted">
+          What customers see on your branded booking page — never ROQ OS branding.
+        </p>
+
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div>
+            <Label htmlFor="primary_color">Primary color</Label>
+            <div className="flex items-center gap-2">
+              <input
+                id="primary_color"
+                name="primary_color"
+                type="color"
+                defaultValue={organization.primary_color ?? "#232120"}
+                disabled={readOnly}
+                className="h-10 w-14 shrink-0 cursor-pointer rounded-[var(--radius-sm)] border border-border-strong bg-surface disabled:cursor-not-allowed disabled:opacity-50"
+              />
+              <span className="text-xs text-foreground-muted">Buttons and accents</span>
+            </div>
+          </div>
+          <div>
+            <Label htmlFor="secondary_color">Secondary color</Label>
+            <div className="flex items-center gap-2">
+              <input
+                id="secondary_color"
+                name="secondary_color"
+                type="color"
+                defaultValue={organization.secondary_color ?? "#f7f5f0"}
+                disabled={readOnly}
+                className="h-10 w-14 shrink-0 cursor-pointer rounded-[var(--radius-sm)] border border-border-strong bg-surface disabled:cursor-not-allowed disabled:opacity-50"
+              />
+              <span className="text-xs text-foreground-muted">Optional accent</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-4">
+          <Label htmlFor="booking_welcome_text">Booking page welcome text</Label>
+          <Textarea
+            id="booking_welcome_text"
+            name="booking_welcome_text"
+            rows={2}
+            placeholder="What can we help you with?"
+            defaultValue={organization.booking_welcome_text ?? ""}
+            disabled={readOnly}
+          />
         </div>
       </div>
 

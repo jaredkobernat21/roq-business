@@ -1,4 +1,4 @@
-# ROQ Business
+# ROQ OS
 
 The reusable multi-tenant operating system for local service businesses
 (duct cleaning, detailing, landscaping, HVAC, plumbing, and similar
@@ -72,9 +72,12 @@ business from scratch.
 npx tsc --noEmit   # type check
 npm run lint       # eslint
 npm run build      # full production build (also type-checks)
+npm test           # Vitest unit tests (pure logic — no database needed)
 ```
 
-All three currently pass clean.
+All four currently pass clean. There's also an automated RLS/tenant-isolation
+suite (`supabase test db`, needs Docker) that runs in CI on every push — see
+[`docs/RLS.md`](docs/RLS.md#testing-tenant-isolation).
 
 ## How auth + onboarding fits together
 
@@ -169,21 +172,22 @@ project settings, pointing at your hosted Supabase project, and add your
 Vercel deployment URL to Supabase Auth → URL Configuration (Site URL +
 Redirect URLs) so email links resolve correctly.
 
-## Database schema & RLS
+## Vision, architecture, schema & RLS
 
+- [`docs/ROQ_OS_SPEC.md`](docs/ROQ_OS_SPEC.md) — **read this first.** The
+  product vocabulary (ROQ, ROQ OS, Account, Space, Mode, the Now/Profile/
+  Work universal navigation) and the Phase 1/Phase 2 Mode plan.
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — **read this before
+  building Phase 2+.** The technical pattern behind the vocabulary above:
+  what stays generic in code (customers, workflows, scheduling, payments,
+  ...) and the generic-concept/mode-specific-label pattern to use when a
+  shared entity gets built.
 - [`docs/SCHEMA.md`](docs/SCHEMA.md) — tables, columns, functions, and the
   pattern to follow when adding a new tenant-scoped table in a later phase.
 - [`docs/RLS.md`](docs/RLS.md) — the security model: how tenant isolation
   is enforced, the recursion problem and how it's avoided, why some
   operations are RPCs instead of table policies, and how to test isolation
   once you have a database to test against.
-- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — **read this before
-  building Phase 2+.** ROQ Business is being built for service businesses
-  first, but is meant to eventually support other business modes
-  (restaurants, SaaS, nonprofits, ...) without rebuilding the core. This
-  doc records what stays generic (customers, workflows, scheduling,
-  payments, ...) and the generic-concept/mode-specific-label pattern to
-  use when a shared entity gets built.
 
 ## Explicitly not in Phase 1
 

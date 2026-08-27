@@ -4,8 +4,15 @@ import { NextResponse, type NextRequest } from "next/server";
 // Accessible without a session; redirected away from once signed in.
 const SIGNED_OUT_ONLY_ROUTES = ["/login", "/signup", "/forgot-password"];
 // Always accessible regardless of auth state: the callback route manages
-// its own redirect logic as it establishes/exchanges the session.
-const ALWAYS_ACCESSIBLE_ROUTES = ["/auth"];
+// its own redirect logic as it establishes/exchanges the session, the
+// branded booking and invoice pages are public by design (customers are
+// never expected to have a ROQ OS account), and /api/webhooks is called
+// directly by third parties (Stripe, ...) with no browser session at all —
+// without this, a webhook POST would get redirected to /login and payments
+// would silently never confirm. Any future customer-facing page (estimates,
+// the payment flow, ...) or webhook endpoint needs to be added here too, or
+// the default "redirect everything to /login" behavior below blocks it.
+const ALWAYS_ACCESSIBLE_ROUTES = ["/auth", "/book", "/invoice", "/api/webhooks"];
 
 /**
  * Runs on every request (see matcher below). Two jobs:

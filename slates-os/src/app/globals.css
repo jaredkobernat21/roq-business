@@ -45,35 +45,19 @@
   --font-sans: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #181715;
-    --surface: #201f1c;
-    --surface-muted: #262420;
-    --surface-hover: #2c2a25;
-    --border: rgba(255, 255, 255, 0.09);
-    --border-strong: rgba(255, 255, 255, 0.16);
-    --foreground: #f3f1ec;
-    --foreground-muted: #a9a296;
-    --foreground-faint: #7d766a;
-    --accent: #f3f1ec;
-    --accent-foreground: #181715;
-    --success: #6fbf95;
-    --success-bg: #1e2c24;
-    --warning: #e0a565;
-    --warning-bg: #2e2417;
-    --danger: #e5897a;
-    --danger-bg: #2e1f1c;
-    --focus-ring: rgba(243, 241, 236, 0.35);
-  }
-}
+/*
+ * ROQ OS always renders the white-background / charcoal-accent
+ * theme, regardless of system dark-mode preference — the premium/minimal
+ * look is a brand decision, not something that should flip with the
+ * visitor's OS setting.
+ */
 
 * {
   border-color: var(--border);
 }
 
 html {
-  color-scheme: light dark;
+  color-scheme: light;
 }
 
 body {

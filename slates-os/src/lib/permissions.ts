@@ -1,4 +1,4 @@
-import type { OrganizationRole } from "@/lib/database.types";
+import type { CustomerStatus, InvoiceStatus, JobStatus, OrganizationRole } from "@/lib/database.types";
 
 /**
  * Central place for "can this role do X" checks. Components and Server
@@ -63,3 +63,85 @@ export const ROLE_DESCRIPTIONS: Record<OrganizationRole, string> = {
   scheduler: "Will manage customers, jobs, and scheduling.",
   technician: "Will see and update their assigned jobs.",
 };
+
+const CUSTOMER_STAFF_ROLES: OrganizationRole[] = ["owner", "admin", "scheduler"];
+
+/** Owner/admin/scheduler manage the customer book; technicians only view it. */
+export function canManageCustomers(role: OrganizationRole): boolean {
+  return CUSTOMER_STAFF_ROLES.includes(role);
+}
+
+export const CUSTOMER_STATUS_LABELS: Record<CustomerStatus, string> = {
+  lead: "Lead",
+  customer: "Customer",
+};
+
+/** Owner/admin configure the service catalog — settings-shaped data. */
+export function canManageServices(role: OrganizationRole): boolean {
+  return ADMIN_ROLES.includes(role);
+}
+
+/** Owner/admin/scheduler create jobs; technicians only work the ones assigned to them. */
+export function canCreateJobs(role: OrganizationRole): boolean {
+  return CUSTOMER_STAFF_ROLES.includes(role);
+}
+
+/** Mirrors the jobs_update RLS policy: staff, or the technician assigned to this job. */
+export function canEditJob(
+  role: OrganizationRole,
+  job: { assigned_to: string | null },
+  userId: string | undefined
+): boolean {
+  if (CUSTOMER_STAFF_ROLES.includes(role)) return true;
+  return job.assigned_to !== null && job.assigned_to === userId;
+}
+
+export const JOB_STATUS_LABELS: Record<JobStatus, string> = {
+  lead: "Lead",
+  estimate: "Estimate",
+  approved: "Approved",
+  scheduled: "Scheduled",
+  in_progress: "In progress",
+  completed: "Completed",
+  cancelled: "Cancelled",
+};
+
+export const JOB_STATUSES: JobStatus[] = [
+  "lead",
+  "estimate",
+  "approved",
+  "scheduled",
+  "in_progress",
+  "completed",
+  "cancelled",
+];
+
+/** Owner/admin configure business hours — same tier as services and business info. */
+export function canManageBusinessHours(role: OrganizationRole): boolean {
+  return ADMIN_ROLES.includes(role);
+}
+
+/** Owner/admin/scheduler create and manage invoices. */
+export function canManageInvoices(role: OrganizationRole): boolean {
+  return CUSTOMER_STAFF_ROLES.includes(role);
+}
+
+/** Owner/admin only — connecting a payment processor is financial-account-tier. */
+export function canManagePaymentConnections(role: OrganizationRole): boolean {
+  return ADMIN_ROLES.includes(role);
+}
+
+export const INVOICE_STATUS_LABELS: Record<InvoiceStatus, string> = {
+  draft: "Draft",
+  sent: "Sent",
+  viewed: "Viewed",
+  partially_paid: "Partially paid",
+  paid: "Paid",
+  overdue: "Overdue",
+  void: "Void",
+};
+
+/** Owner/admin/scheduler can block time on the schedule. */
+export function canManageScheduleBlocks(role: OrganizationRole): boolean {
+  return CUSTOMER_STAFF_ROLES.includes(role);
+}

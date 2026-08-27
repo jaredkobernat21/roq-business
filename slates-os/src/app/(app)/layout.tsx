@@ -1,8 +1,6 @@
 import { redirect } from "next/navigation";
 import { getCurrentOrgContext, getCurrentProfile } from "@/lib/session";
-import { Sidebar } from "@/components/app-shell/sidebar";
-import { MobileHeader } from "@/components/app-shell/mobile-header";
-import { BottomNav } from "@/components/app-shell/bottom-nav";
+import { TopNav } from "@/components/app-shell/top-nav";
 import { SignOutButton } from "@/components/app-shell/sign-out-button";
 import { Card } from "@/components/ui/card";
 
@@ -31,15 +29,16 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   }
 
   return (
-    <div className="flex min-h-screen bg-background">
-      <Sidebar organizationName={context.organization.name} profile={profile} role={context.role} />
-      <div className="flex min-w-0 flex-1 flex-col">
-        <MobileHeader organizationName={context.organization.name} profile={profile} />
-        <main className="flex-1 pb-20 md:pb-0">
-          <div className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-8">{children}</div>
-        </main>
-        <BottomNav />
-      </div>
+    <div className="min-h-screen bg-background">
+      <TopNav
+        organizationName={context.organization.name}
+        profile={profile}
+        role={context.role}
+        businessMode={context.organization.business_mode}
+      />
+      <main>
+        <div className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-8">{children}</div>
+      </main>
     </div>
   );
 }

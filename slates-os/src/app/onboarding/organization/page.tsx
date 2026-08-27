@@ -30,7 +30,7 @@ export default async function OnboardingOrganizationPage({
           {profile?.first_name ? `Welcome, ${profile.first_name}` : "Welcome"}
         </h1>
         <p className="mt-1 text-sm text-foreground-muted">
-          Let&apos;s get your business set up in ROQ Business.
+          Let&apos;s get your business set up in ROQ OS.
         </p>
       </div>
 

@@ -12,3 +12,8 @@ export function initials(firstName?: string | null, lastName?: string | null): s
 export function fullName(firstName?: string | null, lastName?: string | null): string {
   return [firstName, lastName].filter(Boolean).join(" ").trim();
 }
+
+export function formatCents(cents: number | null): string {
+  if (cents === null) return "—";
+  return (cents / 100).toLocaleString("en-US", { style: "currency", currency: "USD" });
+}

@@ -108,25 +108,28 @@ not as the actual security boundary.
 
 ## Testing tenant isolation
 
-There's no Docker available in the environment this was built in, so this
-hasn't been run end-to-end — see the note in the top-level
-[README](../README.md#what-you-need-to-do-next). Once you have a local or
-hosted Supabase project connected, the fastest way to verify isolation:
+An automated pgTAP suite lives at `supabase/tests/*_test.sql` and runs on
+every push/PR via `.github/workflows/database-tests.yml` (no secrets
+needed — it runs entirely against an ephemeral container Postgres GitHub's
+runner provides, never either of the live hosted Supabase projects). Run it
+yourself with:
 
-1. Sign up two accounts (or use the seeded Duct Wrangler owner plus a fresh
-   signup), each creating their own organization.
-2. In the Supabase SQL editor (which runs as `postgres`, bypassing RLS),
-   note both organizations' `id` and both users' `id`.
-3. From the app (not the SQL editor), sign in as user A and confirm `/team`
-   only ever shows organization A's members, and `/settings` only ever
-   shows/edits organization A's business info — there's no way to navigate
-   to organization B's data because the app only ever fetches "my
-   organization."
-4. To actually attempt a cross-tenant read/write (the real RLS test, not
-   just a UI walkthrough): in the browser console while signed in as user
-   A, use the same Supabase client already on `window` (or open the
-   Network tab and replay a request) to call
-   `supabase.from('organizations').select('*').eq('id', '<org B id>')` or
-   `.update({...}).eq('id', '<org B id>')`. Both should return zero rows /
-   no-op — never organization B's data, and never an error that leaks
-   whether the row exists.
+```bash
+supabase db start   # or `supabase start` if that turns out not to be enough
+supabase test db
+```
+
+Each file targets one specific security property rather than testing every
+table's policy exhaustively:
+
+| File | Covers |
+|---|---|
+| `010_helper_functions_recursion_safety` | The security-definer helper functions (`is_org_member`, `is_org_admin`, `is_org_member_any_status`, `is_org_scheduler_or_above`, `get_org_role`, `shares_org_with`) return correct answers per role/status, and querying `organization_members` under RLS doesn't recurse. |
+| `020_organization_members_role_hierarchy` | The `organization_members_update` owner-protection logic: admin can edit non-owner rows, cannot touch an owner row, cannot grant the owner role; owner can do both. |
+| `030_protect_last_owner_trigger` | Demoting/disabling/deleting the sole active owner raises `P0001`; the same op succeeds with a second active owner. |
+| `040_cross_tenant_isolation_core` | The core boundary, swept across `organizations`/`organization_members`/`customers`/`jobs`/`invoices`: a member of org A gets zero rows reaching for org B's data by id — never an error that leaks whether the row exists. |
+| `050_jobs_update_technician_boundary` | The one place app-layer (`canEditJob()` in `src/lib/permissions.ts`) and DB-layer logic must agree: a technician can update only their assigned job; staff can update any job in-org. |
+
+**Deliberately not covered yet**, same policy shape as what's already tested above so a dedicated file would prove the pattern again against a different table name rather than a new mechanism — extend `040_cross_tenant_isolation_core` if one of these needs a regression test, don't add a near-duplicate file: `payment_connections`/`invoice_items` detail policies, `business_hours`/`schedule_blocks`/`services` as standalone files, the booking RPCs, customer CSV import, and the `organization_invitations` `auth.jwt() ->> 'email'` clause specifically.
+
+**As a sanity check against a real hosted project post-deploy** (pgTAP never exercises PostgREST/GoTrue/the anon-key path a browser actually uses, so this is still worth doing once, manually, after a schema change that touches RLS): sign up two accounts, each creating their own organization; from the app (not the SQL editor) sign in as user A and confirm `/team`/`/settings` only ever show organization A's data; then, in the browser console while signed in as user A, call `supabase.from('organizations').select('*').eq('id', '<org B id>')` or `.update({...}).eq('id', '<org B id>')` — both should return zero rows / no-op, never organization B's data or an error that leaks whether the row exists.

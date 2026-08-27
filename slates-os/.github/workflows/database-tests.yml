@@ -1,0 +1,32 @@
+name: database-tests
+
+# Runs the pgTAP RLS/tenant-isolation suite (supabase/tests/*_test.sql)
+# against an ephemeral Postgres container that GitHub's own runner spins up
+# via Docker — this workflow never touches either of the live hosted
+# Supabase projects on the account, and needs no secrets at all.
+#
+# See docs/RLS.md for what these tests cover and why.
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  rls-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: supabase/setup-cli@v1
+        with:
+          version: 2.109.0
+
+      # `supabase test db` docs say it needs the full `supabase start` stack;
+      # Supabase's own CI example uses the lighter `supabase db start`
+      # (Postgres only). These tests only ever manipulate Postgres directly
+      # (GUCs + SQL, never PostgREST/GoTrue), so `db start` should suffice —
+      # if a future run fails here with a "stack not started"-type error,
+      # switch this to `supabase start`.
+      - run: supabase db start
+
+      - run: supabase test db

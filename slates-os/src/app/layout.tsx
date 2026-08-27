@@ -9,7 +9,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "ROQ Business",
+  title: "ROQ OS",
   description: "The operating system for local service businesses.",
 };
 

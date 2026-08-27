@@ -1,27 +1,20 @@
+import type { LabelKey } from "@/lib/labels";
+
 export interface NavItem {
   href: string;
-  label: string;
-  comingSoon?: boolean;
+  labelKey: LabelKey;
 }
 
 /**
- * Plain, serializable nav data — no icon components here. Server Components
- * (Sidebar, MorePage) pass these across to Client Components, and React
- * Server Components can't serialize function/component values across that
- * boundary. Each Client Component that renders these looks up its own icon
- * by href (see components/app-shell/nav-link.tsx and app/(app)/more/page.tsx).
+ * The three top-level tabs rendered in the app shell's pill nav
+ * (see components/app-shell/pill-tabs.tsx). Everything else
+ * (customers/jobs/schedule/invoices/team) lives under the Work tab as
+ * "View all" links from its dashboard cards rather than as its own nav
+ * item — see src/app/(app)/work/page.tsx. Settings is reached from the
+ * account menu, outside this tab hierarchy.
  */
-
-/** Primary module nav — shown in the sidebar and as the mobile bottom tabs. */
-export const PRIMARY_NAV: NavItem[] = [
-  { href: "/home", label: "Home" },
-  { href: "/customers", label: "Customers", comingSoon: true },
-  { href: "/jobs", label: "Jobs", comingSoon: true },
-  { href: "/schedule", label: "Schedule", comingSoon: true },
-];
-
-/** Utility nav — always visible in the sidebar, tucked under "More" on mobile. */
-export const SECONDARY_NAV: NavItem[] = [
-  { href: "/team", label: "Team" },
-  { href: "/settings", label: "Settings" },
+export const TOP_NAV: NavItem[] = [
+  { href: "/home", labelKey: "home" },
+  { href: "/presence", labelKey: "presence" },
+  { href: "/work", labelKey: "work" },
 ];

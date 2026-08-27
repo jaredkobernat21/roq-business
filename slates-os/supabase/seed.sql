@@ -1,5 +1,5 @@
 -- =============================================================================
--- SLATES OS — local development seed data
+-- ROQ OS — local development seed data
 -- =============================================================================
 -- Runs automatically after `supabase db reset` against your LOCAL Supabase
 -- instance only. Never run this against a hosted/production project — it

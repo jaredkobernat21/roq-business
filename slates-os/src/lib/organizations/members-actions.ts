@@ -108,6 +108,18 @@ export async function inviteMemberAction(
     return { error: error.message };
   }
 
+  // Best-effort: the invitation row is already saved above regardless of
+  // whether this send succeeds, so a failure here shouldn't block the
+  // owner/admin from seeing "Invitation created" — it just means they'd
+  // need to share the invite manually. See send-invite-email's own comment
+  // for why this isn't a database webhook.
+  const { error: emailError } = await supabase.functions.invoke("send-invite-email", {
+    body: { organizationId: context.organization.id, email, role, invitedBy: user.id },
+  });
+  if (emailError) {
+    console.error("send-invite-email failed:", emailError);
+  }
+
   revalidatePath("/team");
   return { success: true };
 }

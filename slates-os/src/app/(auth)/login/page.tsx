@@ -11,7 +11,7 @@ export default async function LoginPage({
   return (
     <div>
       <h1 className="text-xl font-semibold text-foreground">Sign in</h1>
-      <p className="mt-1 text-sm text-foreground-muted">Welcome back to ROQ Business.</p>
+      <p className="mt-1 text-sm text-foreground-muted">Welcome back to ROQ OS.</p>
 
       <div className="mt-6">
         <LoginForm next={next} />

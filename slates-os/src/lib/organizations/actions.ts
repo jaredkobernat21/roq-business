@@ -69,10 +69,22 @@ export async function updateOrganizationAction(
   const email = String(formData.get("email") ?? "").trim();
   const website = String(formData.get("website") ?? "").trim();
   const logoUrl = String(formData.get("logo_url") ?? "").trim();
+  const address = String(formData.get("address") ?? "").trim();
+  const primaryColor = String(formData.get("primary_color") ?? "").trim();
+  const secondaryColor = String(formData.get("secondary_color") ?? "").trim();
+  const bookingWelcomeText = String(formData.get("booking_welcome_text") ?? "").trim();
   const timezone = String(formData.get("timezone") ?? "America/New_York");
 
   if (!name) {
     return { error: "Business name is required." };
+  }
+
+  const HEX_RE = /^#[0-9a-f]{6}$/i;
+  if (primaryColor && !HEX_RE.test(primaryColor)) {
+    return { error: "Primary color must be a hex value like #1F2937." };
+  }
+  if (secondaryColor && !HEX_RE.test(secondaryColor)) {
+    return { error: "Secondary color must be a hex value like #1F2937." };
   }
 
   const supabase = await createClient();
@@ -84,6 +96,10 @@ export async function updateOrganizationAction(
       email: email || null,
       website: website || null,
       logo_url: logoUrl || null,
+      address: address || null,
+      primary_color: primaryColor || null,
+      secondary_color: secondaryColor || null,
+      booking_welcome_text: bookingWelcomeText || null,
       timezone: (TIMEZONE_VALUES as readonly string[]).includes(timezone) ? timezone : "America/New_York",
     })
     .eq("id", context.organization.id);
