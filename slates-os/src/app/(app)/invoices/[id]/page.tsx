@@ -2,15 +2,16 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCurrentOrgContext } from "@/lib/session";
 import { createClient } from "@/lib/supabase/server";
-import { canManageInvoices, INVOICE_STATUS_LABELS } from "@/lib/permissions";
+import { canManageInvoices, INVOICE_STATUS_LABELS, PAYMENT_METHOD_LABELS } from "@/lib/permissions";
 import { markInvoiceSentAction, voidInvoiceAction } from "@/lib/invoices/actions";
 import { siteUrl } from "@/lib/site-url";
-import { fullName } from "@/lib/utils";
+import { formatCents, fullName } from "@/lib/utils";
 import { Card, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CopyLinkButton } from "@/app/(app)/settings/copy-link-button";
 import { InvoiceEditForm } from "./invoice-edit-form";
+import { RecordPaymentForm } from "./record-payment-form";
 
 export default async function InvoiceDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -29,16 +30,24 @@ export default async function InvoiceDetailPage({ params }: { params: Promise<{ 
     notFound();
   }
 
-  const [{ data: customer }, { data: items }] = await Promise.all([
+  const [{ data: customer }, { data: items }, { data: payments }] = await Promise.all([
     supabase.from("customers").select("id, first_name, last_name").eq("id", invoice.customer_id).maybeSingle(),
     supabase
       .from("invoice_items")
       .select("*")
       .eq("invoice_id", id)
       .order("sort_order", { ascending: true }),
+    supabase
+      .from("payments")
+      .select("*")
+      .eq("invoice_id", id)
+      .order("paid_at", { ascending: false }),
   ]);
 
   const canManage = canManageInvoices(context.role);
+  const balanceDueCents = invoice.total_cents - invoice.amount_paid_cents;
+  const canRecordPayment =
+    canManage && invoice.status !== "draft" && invoice.status !== "void" && balanceDueCents > 0;
   const taxPercent =
     invoice.subtotal_cents > 0 ? Math.round((invoice.tax_cents / invoice.subtotal_cents) * 10000) / 100 : 0;
   const publicUrl = `${siteUrl()}/invoice/${invoice.id}`;
@@ -84,6 +93,56 @@ export default async function InvoiceDetailPage({ params }: { params: Promise<{ 
             </code>
             <CopyLinkButton text={publicUrl} />
           </div>
+        </Card>
+      )}
+
+      {invoice.status !== "draft" && (
+        <Card>
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <CardTitle>Payments</CardTitle>
+              <CardDescription>
+                {balanceDueCents > 0
+                  ? `${formatCents(balanceDueCents)} outstanding of ${formatCents(invoice.total_cents)}.`
+                  : `Paid in full — ${formatCents(invoice.amount_paid_cents)} received.`}
+              </CardDescription>
+            </div>
+          </div>
+
+          {payments && payments.length > 0 && (
+            <ul className="mt-4 divide-y divide-border">
+              {payments.map((payment) => (
+                <li key={payment.id} className="flex items-center justify-between gap-3 py-2.5 text-sm">
+                  <div className="min-w-0">
+                    <p className="text-foreground">
+                      {payment.provider === "manual"
+                        ? PAYMENT_METHOD_LABELS[payment.method ?? "other"]
+                        : "Card payment"}
+                      {payment.reference && (
+                        <span className="text-foreground-muted"> · {payment.reference}</span>
+                      )}
+                    </p>
+                    <p className="text-xs text-foreground-faint">{payment.paid_at.slice(0, 10)}</p>
+                  </div>
+                  <span className="shrink-0 font-medium text-foreground">
+                    {formatCents(payment.amount_cents)}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {canRecordPayment && (
+            <div className="mt-5 border-t border-border pt-5">
+              <RecordPaymentForm invoiceId={invoice.id} balanceDueCents={balanceDueCents} />
+            </div>
+          )}
+
+          {!canRecordPayment && (!payments || payments.length === 0) && (
+            <p className="mt-4 text-sm text-foreground-muted">
+              {canManage ? "No payments recorded yet." : "Only owners, admins, and schedulers can record payments."}
+            </p>
+          )}
         </Card>
       )}
 

@@ -1,4 +1,10 @@
-import type { CustomerStatus, InvoiceStatus, JobStatus, OrganizationRole } from "@/lib/database.types";
+import type {
+  CustomerStatus,
+  InvoiceStatus,
+  JobStatus,
+  OrganizationRole,
+  PaymentMethod,
+} from "@/lib/database.types";
 
 /**
  * Central place for "can this role do X" checks. Components and Server
@@ -130,6 +136,13 @@ export function canManageInvoices(role: OrganizationRole): boolean {
 export function canManagePaymentConnections(role: OrganizationRole): boolean {
   return ADMIN_ROLES.includes(role);
 }
+
+export const PAYMENT_METHOD_LABELS: Record<PaymentMethod, string> = {
+  cash: "Cash",
+  check: "Check",
+  bank_transfer: "Bank transfer",
+  other: "Other",
+};
 
 export const INVOICE_STATUS_LABELS: Record<InvoiceStatus, string> = {
   draft: "Draft",

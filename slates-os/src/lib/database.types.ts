@@ -30,7 +30,10 @@ export type ActivityEventType = "customer_created" | "job_created" | "job_status
 export type ImportStatus = "processing" | "completed" | "failed";
 export type ImportRowStatus = "imported" | "duplicate" | "error";
 export type InvoiceStatus = "draft" | "sent" | "viewed" | "partially_paid" | "paid" | "overdue" | "void";
-export type PaymentProvider = "stripe";
+export type PaymentProvider = "stripe" | "manual";
+
+/** Only set on manual payments — see the payments migration. */
+export type PaymentMethod = "cash" | "check" | "bank_transfer" | "other";
 export type PaymentConnectionStatus = "pending" | "connected" | "disconnected" | "error";
 export type PaymentStatus = "pending" | "succeeded" | "failed" | "refunded";
 
@@ -175,6 +178,10 @@ type PaymentRow = {
   external_payment_id: string;
   amount_cents: number;
   status: PaymentStatus;
+  method: PaymentMethod | null;
+  reference: string | null;
+  recorded_by: string | null;
+  paid_at: string;
   created_at: string;
 };
 
@@ -502,6 +509,16 @@ export type Database = {
       };
       record_stripe_payment: {
         Args: { target_invoice_id: string; stripe_payment_id: string; amount_cents: number };
+        Returns: undefined;
+      };
+      record_manual_payment: {
+        Args: {
+          target_invoice_id: string;
+          amount_cents: number;
+          payment_method: PaymentMethod;
+          payment_reference?: string | null;
+          received_at?: string;
+        };
         Returns: undefined;
       };
     };

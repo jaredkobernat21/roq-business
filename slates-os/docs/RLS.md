@@ -50,7 +50,7 @@ functions rather than writing a fresh `exists (select ...)` against
 
 ## Why some operations are RPCs instead of policies
 
-Two things don't fit a simple per-table policy:
+Three things don't fit a simple per-table policy:
 
 1. **Atomic multi-table writes.** Creating an organization must also create
    its owner membership row, in the same transaction, or you can end up
@@ -68,6 +68,21 @@ Two things don't fit a simple per-table policy:
    `security definer` function that internally re-checks `is_org_member`
    before returning anything. Never add a policy or view that exposes
    `auth.users` more broadly than this.
+
+3. **Ledger writes.** `payments` has a SELECT grant and no INSERT grant, so
+   the money ledger can only be written through an RPC. There are two, and
+   they differ in where their trust comes from. `record_stripe_payment` is
+   called by the webhook route after it verifies Stripe's signature — no user
+   session is involved at all. `record_manual_payment` is called by a
+   signed-in user recording a cash or check payment, so it re-checks
+   `is_org_scheduler_or_above` against the invoice's organization itself.
+
+   That check is the entire security boundary for manual payments: the
+   function is `security definer`, so RLS constrains nothing inside it.
+   Without the check, any authenticated user could settle any invoice in any
+   Space. It has dedicated pgTAP coverage for that reason, and the same care
+   applies to whatever `record_*_payment` a second processor eventually
+   brings.
 
 ## The last-owner invariant
 
