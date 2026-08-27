@@ -268,10 +268,26 @@ pass = "env(RESEND_SMTP_PASSWORD)"
 admin_email = "no-reply@roqhome.com"
 sender_name = "ROQ OS"
 
-# Uncomment to customize email template
-# [auth.email.template.invite]
-# subject = "You have been invited"
-# content_path = "./supabase/templates/invite.html"
+# Auth email templates.
+#
+# Only the two designed templates are managed here. The remaining Auth emails
+# (invite, magic link, email change, reauthentication, and the password-changed
+# / email-address-changed notifications) are still plain unstyled HTML living
+# only in the dashboard — they carry no branding, so they were left alone rather
+# than pulled in half-finished. Bringing them under version control and giving
+# them this same shell is worth doing; it just hasn't been done.
+#
+# These deliberately render the wordmark as text rather than an <img>. Most mail
+# clients block remote images by default, so a hosted logo silently renders as
+# nothing for a large share of recipients — and the previous version pointed at
+# slatesweb.com, which put Auth email on a dependency we don't want to keep.
+[auth.email.template.confirmation]
+subject = "Confirm your email address"
+content_path = "./supabase/templates/confirmation.html"
+
+[auth.email.template.recovery]
+subject = "Reset your password"
+content_path = "./supabase/templates/recovery.html"
 
 # Uncomment to customize notification email template
 # [auth.email.notification.password_changed]

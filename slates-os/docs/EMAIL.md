@@ -77,6 +77,10 @@ this command with a placeholder or test value.
 It also pushes *all* of `config.toml`, not just the email section, so anything
 else that has drifted goes up in the same operation.
 
+**Set `RESEND_SMTP_PASSWORD` on every push, even a template-only one.** The push
+sends the whole file including `[auth.email.smtp]`, so a push with that variable
+unset is a push of an empty SMTP password.
+
 Rotating the key means running that command again with the new value, and
 separately updating the Edge Function secret:
 
@@ -91,8 +95,33 @@ for a real address on the deployed app and confirm the message arrives from
 `no-reply@roqhome.com`. Resend's dashboard logs every send attempt with its
 delivery status, which is the first place to look when a message doesn't land.
 
-## Not done yet
+## Templates
 
-The Auth emails still use Supabase's stock templates — functional, unbranded.
-Custom templates go in `[auth.email.template.*]` in `config.toml` with the HTML
-alongside them; worth doing before a wider launch, not blocking one.
+Auth email bodies are templates, and they had the same drift problem the SMTP
+block did: two of them were designed and branded entirely in the dashboard, with
+nothing in the repo. Both still said SLATES and pulled a logo from
+`slatesweb.com` long after the app itself became ROQ OS.
+
+The two designed templates now live in `supabase/templates/` and are wired up
+through `[auth.email.template.*]` in `config.toml`:
+
+| Template | File | Sent when |
+| --- | --- | --- |
+| `confirmation` | `templates/confirmation.html` | a new account signs up |
+| `recovery` | `templates/recovery.html` | a password reset is requested |
+
+They render the ROQ OS wordmark as **styled text, not an image**, on purpose.
+Most mail clients block remote images by default, so a hosted logo is invisible
+to a large share of recipients — the SLATES version had been arriving logo-less
+for those people. Text always renders, and it keeps Auth email off any
+cross-site asset dependency.
+
+The other six Auth emails — invite, magic link, email change, reauthentication,
+and the password-changed / email-address-changed notifications — are still plain
+unstyled HTML that exists only in the dashboard. They carry no stale branding,
+which is why they weren't urgent, but they are unversioned and visually
+inconsistent with the two above. Giving them the same shell and pulling them
+into `supabase/templates/` is the obvious next step.
+
+Note that the Auth `invite` template is **not** what team invites use — those go
+through the Edge Function path described above and are styled in its own source.
