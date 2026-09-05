@@ -17,7 +17,7 @@
 <link rel="canonical" href="https://slatesweb.com/" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --ink: #0B0B0B;
@@ -406,30 +406,6 @@
   .audit-badge-pill.impact { background: var(--ink); color: var(--white); }
 
   .audit-badge svg { width: 14px; height: 14px; stroke: var(--muted-2); fill: none; stroke-width: 1.7; }
-
-  /* Handwritten annotations */
-  .note {
-    position: absolute;
-    font-family: 'Caveat', cursive;
-    font-weight: 700;
-    font-size: 22px;
-    color: var(--ink-soft);
-    line-height: 1.15;
-    z-index: 3;
-    pointer-events: none;
-  }
-
-  .note svg { stroke: var(--ink-soft); fill: none; stroke-width: 1.8; }
-
-  .note-left { top: -6%; left: 2%; text-align: right; }
-  .note-left svg { width: 42px; height: 34px; margin: 4px 0 0 auto; display: block; transform: scaleX(-1) rotate(6deg); }
-
-  .note-right { top: -8%; right: 6%; text-align: left; }
-  .note-right svg { width: 46px; height: 30px; margin-top: 4px; display: block; }
-
-  @media (max-width: 720px) {
-    .note { display: none; }
-  }
 
   /* ---------- Section shell ---------- */
 
@@ -839,14 +815,6 @@
           <div class="audit-side">
             <div class="audit-side-caption">Stronger businesses<br />go further.</div>
           </div>
-
-          <span class="note note-left">Find<br />the gaps.
-            <svg viewBox="0 0 60 40"><path d="M4 6c14 4 30 12 50 26" stroke-linecap="round"/><path d="M46 24l8 8-10 3"/></svg>
-          </span>
-
-          <span class="note note-right">Then<br />fix them.
-            <svg viewBox="0 0 60 40"><path d="M6 30c16-6 32-18 48-24" stroke-linecap="round"/><path d="M40 6l14 0-6 12"/></svg>
-          </span>
 
           <div class="audit-card">
             <div class="audit-card-head">

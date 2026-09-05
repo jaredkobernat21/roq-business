@@ -95,6 +95,20 @@
 
   .brand-lockup:hover .brand-by { color: var(--muted); }
 
+  .os-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    background: var(--ink);
+    color: var(--white);
+    padding: 4px 7px;
+    border-radius: 6px;
+  }
+
+  .nav-links a.back-link { color: var(--muted); }
+  .nav-links a.back-link:hover { color: var(--ink); opacity: 1; }
+
   /* ---------- Header ---------- */
 
   header {
@@ -1279,10 +1293,10 @@
 
   <header>
     <div class="wrap header-inner">
-      <a class="brand-lockup" href="index.html" aria-label="SLATES by ROQ — home"><img class="logo-mark" src="ASSETS/slates-logo.png" alt="SLATES" /><span class="brand-by" aria-hidden="true">by ROQ</span></a>
+      <a class="brand-lockup" href="index.html" aria-label="SLATES by ROQ — home"><img class="logo-mark" src="ASSETS/slates-logo.png" alt="SLATES" /><span class="os-badge" aria-hidden="true">OS</span></a>
 
       <nav class="nav-links">
-        <a href="index.html">Home</a>
+        <a href="index.html" class="back-link">&larr; Home</a>
         <a href="#product">Product</a>
         <a href="#presence">Presence</a>
         <a href="#work">Work</a>
@@ -1299,7 +1313,7 @@
       </div>
     </div>
     <div class="nav-dropdown" id="navDropdown">
-      <a href="index.html">Home</a>
+      <a href="index.html">&larr; Home</a>
       <a href="#product">Product</a>
       <a href="#presence">Presence</a>
       <a href="#work">Work</a>
