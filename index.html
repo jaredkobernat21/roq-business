@@ -139,25 +139,6 @@
     gap: 18px;
   }
 
-  .header-tagline {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding-right: 4px;
-  }
-
-  .header-tagline .dash { width: 20px; height: 1px; background: var(--line); flex-shrink: 0; }
-
-  .header-tagline .txt {
-    font-size: 9.5px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    line-height: 1.5;
-    color: var(--muted-2);
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-
   .btn {
     display: inline-flex;
     align-items: center;
@@ -251,16 +232,7 @@
     padding: clamp(30px, 6vw, 64px) 0 clamp(46px, 7vw, 84px);
   }
 
-  .eyebrow-row {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--muted-2);
-  }
-
   h1.hero-headline {
-    margin-top: 20px;
     font-weight: 600;
     font-size: clamp(38px, 5.4vw, 62px);
     line-height: 1.05;
@@ -726,7 +698,7 @@
   }
 
   @media (max-width: 980px) {
-    .nav-links, .header-tagline { display: none; }
+    .nav-links { display: none; }
     .nav-toggle { display: flex; }
     .hero-grid { grid-template-columns: minmax(0, 1fr); }
     .audit-stage { margin-top: 20px; min-height: 340px; }
@@ -767,10 +739,6 @@
       </nav>
 
       <div class="header-actions">
-        <div class="header-tagline">
-          <span class="dash"></span>
-          <span class="txt">A stronger<br />business ahead</span>
-        </div>
         <button type="button" class="btn btn-dark" data-talk>Let's Talk</button>
         <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
           <span></span>
@@ -794,8 +762,6 @@
     <section class="hero">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <div class="eyebrow-row">Diagnose&nbsp; /&nbsp; Fix&nbsp; /&nbsp; Grow</div>
-
           <h1 class="hero-headline">Find what's holding your business back.</h1>
 
           <p class="hero-sub">Websites, visibility, automation, CRM, and growth systems — built around what your business actually needs.</p>
@@ -804,7 +770,6 @@
             <button type="button" class="btn btn-dark btn-lg" data-talk>Start with an audit
               <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </button>
-            <a class="btn btn-light btn-lg" href="#services">See what we fix</a>
           </div>
 
           <div class="hero-caption"><span class="dash"></span> Clearer insights. Stronger systems. Real growth.</div>
