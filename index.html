@@ -597,37 +597,6 @@
   .step-arrow svg { width: 16px; height: 16px; stroke: var(--line); fill: none; stroke-width: 1.6; }
   .step:last-child .step-arrow { display: none; }
 
-  /* ---------- Testimonial ---------- */
-
-  .testimonial-shell {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 28px;
-    flex-wrap: wrap;
-    background: var(--panel);
-    border: 1px solid var(--line-soft);
-    border-radius: var(--radius);
-    padding: clamp(24px, 3.4vw, 34px) clamp(24px, 3.6vw, 40px);
-  }
-
-  .testimonial-left { display: flex; align-items: center; gap: 16px; max-width: 640px; }
-  .testimonial-avatar {
-    width: 48px; height: 48px; border-radius: 50%;
-    background: var(--ink); color: var(--white);
-    font-size: 15px; font-weight: 600;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-  .testimonial-quote { font-size: 14px; line-height: 1.6; color: var(--ink-soft); }
-  .testimonial-name { margin-top: 10px; font-size: 12.5px; font-weight: 600; }
-  .testimonial-name span { font-weight: 400; color: var(--muted); }
-
-  .testimonial-right { text-align: right; flex-shrink: 0; }
-  .stars { display: flex; gap: 3px; justify-content: flex-end; }
-  .stars svg { width: 16px; height: 16px; fill: var(--gold); stroke: none; }
-  .testimonial-tag { margin-top: 8px; font-size: 12px; font-weight: 500; color: var(--muted); white-space: nowrap; }
-
   /* ---------- About ---------- */
 
   .about-shell {
@@ -860,9 +829,6 @@
     .ai-stage-bg { display: none; }
     .ai-note { display: none; }
     .about-shell { grid-template-columns: minmax(0, 1fr); }
-    .testimonial-shell { justify-content: flex-start; }
-    .testimonial-right { text-align: left; }
-    .stars { justify-content: flex-start; }
   }
 
   @media (max-width: 720px) {
@@ -1158,31 +1124,6 @@
       </div>
     </section>
 
-    <!-- ================= TESTIMONIAL ================= -->
-    <section class="section-block bordered" id="results">
-      <div class="wrap">
-        <div class="testimonial-shell">
-          <div class="testimonial-left">
-            <span class="testimonial-avatar">MC</span>
-            <div>
-              <p class="testimonial-quote">&ldquo;SLATES helped me go from feeling overwhelmed by AI to actually using it in my business every day. I'm saving hours each week, my follow-up is consistent, and I've won 3 new listings in the last 60 days.&rdquo;</p>
-              <div class="testimonial-name">Megan Carter <span>| Realtor&reg;, Austin, TX</span></div>
-            </div>
-          </div>
-          <div class="testimonial-right">
-            <div class="stars">
-              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
-              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
-              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
-              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
-              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
-            </div>
-            <div class="testimonial-tag">A game-changer for modern Realtors.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ================= ABOUT ================= -->
     <section class="section-block bordered" id="about">
       <div class="wrap">
@@ -1239,7 +1180,6 @@
           <nav class="footer-links">
             <a href="#solutions">AI for Realtors</a>
             <a href="#process">Workflows</a>
-            <a href="#results">Results</a>
             <a href="os.html">SLATES OS</a>
             <a href="#about">About</a>
             <a href="founder.html">Founder</a>
