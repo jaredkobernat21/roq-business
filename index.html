@@ -12,8 +12,8 @@
 </script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SLATES — Find what's holding your business back.</title>
-<meta name="description" content="SLATES finds what's holding your business back and fixes it — websites, visibility, automation, CRM, and growth systems built around what your business actually needs." />
+<title>SLATES AI — AI that drives growth for real estate.</title>
+<meta name="description" content="SLATES helps Realtors turn AI into a growth engine — automate follow-up, create listing content in minutes, and get found in Google and AI search." />
 <link rel="canonical" href="https://slatesweb.com/" />
 
 <script type="application/ld+json">
@@ -44,7 +44,7 @@
 <link rel="apple-touch-icon" href="ASSETS/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --ink: #0B0B0B;
@@ -57,6 +57,7 @@
     --panel-2: #F4F3F1;
     --white: #FFFFFF;
     --green: #16A34A;
+    --green-tint: #E8F7EC;
     --gold: #F5B301;
     --radius: 20px;
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -80,6 +81,14 @@
   ::selection { background: var(--ink); color: var(--white); }
 
   .wrap { max-width: 1180px; margin: 0 auto; padding: 0 clamp(16px, 3vw, 28px); }
+
+  .note {
+    font-family: 'Caveat', cursive;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 1.25;
+    color: var(--muted);
+  }
 
   /* ---------- Wordmark / logo ---------- */
 
@@ -164,6 +173,13 @@
     display: flex;
     align-items: center;
     gap: 18px;
+  }
+
+  .header-tagline {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted-2);
+    white-space: nowrap;
   }
 
   .btn {
@@ -256,159 +272,199 @@
     grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
     gap: clamp(24px, 4vw, 56px);
     align-items: center;
-    padding: clamp(30px, 6vw, 64px) 0 clamp(46px, 7vw, 84px);
+    padding: clamp(30px, 6vw, 60px) 0 clamp(46px, 7vw, 84px);
   }
 
-  h1.hero-headline {
+  .hero-eyebrow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+    font-size: 11px;
     font-weight: 600;
-    font-size: clamp(38px, 5.4vw, 62px);
-    line-height: 1.05;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+  }
+
+  .hero-eyebrow .x { color: var(--line); font-weight: 400; }
+
+  h1.hero-headline {
+    margin-top: 18px;
+    font-weight: 600;
+    font-size: clamp(34px, 4.6vw, 52px);
+    line-height: 1.08;
     letter-spacing: -0.03em;
   }
 
   .hero-sub {
-    margin-top: 22px;
+    margin-top: 20px;
+    max-width: 40ch;
+    font-size: clamp(15px, 1.2vw, 16.5px);
+    line-height: 1.6;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+
+  .hero-body {
+    margin-top: 12px;
     max-width: 42ch;
-    font-size: clamp(15px, 1.25vw, 16.5px);
+    font-size: 13.5px;
     line-height: 1.7;
     color: var(--muted);
-    font-weight: 400;
   }
 
   .hero-ctas {
-    margin-top: 30px;
+    margin-top: 28px;
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
   }
 
-  .hero-caption {
-    margin-top: 34px;
+  .hero-checks {
+    margin-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .hero-check {
     display: flex;
     align-items: center;
-    gap: 12px;
-    font-size: 10.5px;
+    gap: 8px;
+    font-size: 12.5px;
     font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted-2);
+    color: var(--muted);
   }
 
-  .hero-caption .dash { width: 22px; height: 1px; background: var(--line); flex-shrink: 0; }
-
-  /* ---------- Audit card stage ---------- */
-
-  .audit-stage { position: relative; min-height: 400px; }
-
-  .audit-side {
-    position: absolute;
-    top: 6%;
-    right: -2%;
-    bottom: 6%;
-    width: 42%;
-    border-radius: 18px;
-    background: radial-gradient(120% 140% at 20% 0%, #2C2C2C 0%, #101010 60%, #0B0B0B 100%);
-    box-shadow: 0 30px 70px rgba(11, 11, 11, 0.28);
-    z-index: 1;
-  }
-
-  .audit-side-caption {
-    position: absolute;
-    left: 16px;
-    bottom: 16px;
-    right: 16px;
-    font-size: 9.5px;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    line-height: 1.6;
-    color: rgba(255,255,255,0.72);
-  }
-
-  .audit-card {
-    position: relative;
-    z-index: 2;
-    margin-right: 14%;
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    box-shadow: 0 30px 70px rgba(11, 11, 11, 0.14);
-    overflow: hidden;
-  }
-
-  .audit-card-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 18px 22px 14px;
-  }
-
-  .audit-card-head .logo-mark { height: 13px; }
-
-  .audit-card-tag {
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted-2);
-  }
-
-  .audit-card-body { padding: 6px 22px 22px; }
-
-  .audit-title { font-size: 21px; font-weight: 600; letter-spacing: -0.01em; }
-
-  .audit-sub { margin-top: 8px; font-size: 12.5px; line-height: 1.6; color: var(--muted); max-width: 38ch; }
-
-  .audit-rows { margin-top: 18px; display: flex; flex-direction: column; }
-
-  .audit-row {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    padding: 14px 0;
-    border-top: 1px solid var(--line-soft);
-  }
-
-  .audit-row:first-child { border-top: none; }
-
-  .audit-icon {
-    width: 34px; height: 34px;
-    border-radius: 9px;
-    background: var(--panel-2);
+  .hero-check span {
+    width: 17px; height: 17px;
+    border-radius: 50%;
+    background: var(--green-tint);
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
 
-  .audit-icon svg { width: 17px; height: 17px; stroke: var(--ink); fill: none; stroke-width: 1.6; }
+  .hero-check svg { width: 9px; height: 9px; stroke: var(--green); fill: none; stroke-width: 3; }
 
-  .audit-row-name { font-size: 13.5px; font-weight: 500; }
-  .audit-row-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  /* ---------- AI stage (hero visual) ---------- */
 
-  .audit-badge {
-    margin-left: auto;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  .ai-stage { position: relative; min-height: 500px; }
+
+  .ai-stage-bg {
+    position: absolute;
+    inset: 4% 2%;
+    border-radius: 24px;
+    background:
+      radial-gradient(120% 100% at 85% 10%, rgba(22,163,74,0.10) 0%, rgba(22,163,74,0) 55%),
+      linear-gradient(150deg, #EFEDE9 0%, #E3E0DA 48%, #CFCBC2 100%);
+    box-shadow: 0 30px 70px rgba(11, 11, 11, 0.10);
+    overflow: hidden;
   }
 
-  .audit-badge-pill {
-    font-size: 10.5px;
-    font-weight: 500;
-    padding: 6px 11px;
+  .ai-stage-bg::before {
+    content: "";
+    position: absolute;
+    left: -10%; right: -10%; bottom: -6%;
+    height: 46%;
+    background: linear-gradient(180deg, rgba(11,11,11,0) 0%, rgba(11,11,11,0.14) 100%);
+    clip-path: polygon(0% 60%, 14% 42%, 30% 55%, 46% 30%, 62% 48%, 78% 22%, 100% 40%, 100% 100%, 0% 100%);
+  }
+
+  .ai-card {
+    position: absolute;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 0 20px 46px rgba(11, 11, 11, 0.14);
+    padding: 14px 16px;
+    z-index: 2;
+  }
+
+  .ai-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .ai-card-head-left { display: flex; align-items: center; gap: 7px; }
+  .ai-card-head svg { width: 13px; height: 13px; stroke: var(--ink); fill: none; stroke-width: 1.8; }
+
+  .ai-pill {
+    font-size: 9.5px;
+    font-weight: 600;
+    padding: 3px 8px;
     border-radius: 999px;
-    background: var(--panel-2);
-    color: var(--muted);
+    background: var(--green-tint);
+    color: var(--green);
     white-space: nowrap;
   }
 
-  .audit-badge-pill.impact { background: var(--ink); color: var(--white); }
+  .ai-pill.muted { background: var(--panel-2); color: var(--muted); }
 
-  .audit-badge svg { width: 14px; height: 14px; stroke: var(--muted-2); fill: none; stroke-width: 1.7; }
+  .ai-card-crm { top: 6%; left: 0; width: 230px; }
+  .ai-crm-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 6px 0;
+    font-size: 11px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .ai-crm-row:first-of-type { border-top: none; margin-top: 8px; }
+  .ai-crm-row span:first-child { color: var(--muted); }
+  .ai-crm-row span:last-child { font-weight: 600; }
+  .ai-crm-row.up span:last-child { color: var(--green); }
+
+  .ai-card-followup { top: 22%; right: 0; width: 220px; }
+  .ai-followup-body { margin-top: 10px; font-size: 10.5px; line-height: 1.55; color: var(--muted); }
+  .ai-followup-body b { color: var(--ink); font-weight: 600; }
+
+  .ai-card-listing { bottom: 2%; left: 8%; width: 200px; }
+  .ai-listing-thumb {
+    margin-top: 10px;
+    height: 60px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #DAD6CE, #EFEDE9);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ai-listing-thumb svg { width: 22px; height: 22px; stroke: var(--muted-2); fill: none; stroke-width: 1.5; }
+  .ai-listing-copy { margin-top: 9px; font-size: 10px; line-height: 1.55; color: var(--muted); }
+
+  .ai-card-search { bottom: 0; right: 0; width: 240px; }
+  .ai-search-bar {
+    margin-top: 9px;
+    display: flex; align-items: center; gap: 6px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 10px;
+    color: var(--muted);
+  }
+  .ai-search-result { margin-top: 10px; display: flex; gap: 8px; align-items: flex-start; }
+  .ai-avatar {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--ink); color: var(--white);
+    font-size: 9px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .ai-search-result p { font-size: 10px; line-height: 1.5; color: var(--muted); }
+  .ai-search-result b { color: var(--ink); }
+
+  .ai-note {
+    position: absolute;
+    z-index: 3;
+    text-align: center;
+  }
+  .ai-note-1 { top: -9%; left: 36%; transform: rotate(-3deg); }
+  .ai-note-2 { top: 40%; left: -2%; transform: rotate(-3deg); text-align: left; }
+  .ai-note svg { width: 30px; height: 24px; stroke: var(--muted-2); fill: none; stroke-width: 1.4; display: block; margin: 4px auto 0; }
 
   /* ---------- Section shell ---------- */
 
-  .section-block { padding: clamp(48px, 7vw, 78px) 0; }
+  .section-block { padding: clamp(52px, 7vw, 84px) 0; }
   .section-block.bordered { border-top: 1px solid var(--line-soft); }
 
   .eyebrow {
@@ -419,8 +475,6 @@
     color: var(--muted-2);
     text-align: center;
   }
-
-  .section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-top: 14px; }
 
   .section-title-lg {
     font-size: clamp(26px, 3.4vw, 38px);
@@ -436,80 +490,143 @@
   .focus-head .section-title-lg { max-width: none; margin: 0 auto; }
   .focus-head .section-sub-lg { max-width: 46ch; margin: 14px auto 0; }
 
-  /* ---------- Five focus areas ---------- */
+  /* ---------- Three solution pillars ---------- */
 
-  .focus-grid {
+  .solution-grid {
     margin-top: 40px;
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 14px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
   }
 
-  .focus-card {
+  .solution-card {
     background: var(--panel);
     border: 1px solid var(--line-soft);
-    border-radius: 16px;
-    padding: 24px 20px;
-    transition: transform 0.2s var(--ease), border-color 0.2s var(--ease);
+    border-radius: 18px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
   }
 
-  .focus-card:hover { transform: translateY(-3px); border-color: var(--line); }
-
-  .focus-icon {
-    width: 42px; height: 42px;
-    border-radius: 11px;
-    background: var(--white);
-    border: 1px solid var(--line);
+  .solution-icon {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: var(--green-tint);
     display: flex; align-items: center; justify-content: center;
   }
+  .solution-icon svg { width: 18px; height: 18px; stroke: var(--green); fill: none; stroke-width: 1.6; }
 
-  .focus-icon svg { width: 19px; height: 19px; stroke: var(--ink); fill: none; stroke-width: 1.5; }
+  .solution-eyebrow { margin-top: 14px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted-2); }
+  .solution-title { margin-top: 6px; font-size: 19px; font-weight: 600; letter-spacing: -0.01em; }
+  .solution-body { margin-top: 8px; font-size: 12.5px; line-height: 1.6; color: var(--muted); }
 
-  .focus-title { margin-top: 16px; font-size: 15.5px; font-weight: 600; letter-spacing: -0.01em; }
-  .focus-body { margin-top: 8px; font-size: 12.5px; line-height: 1.6; color: var(--muted); }
-  .focus-link { margin-top: 14px; display: inline-flex; }
-  .focus-link svg { width: 15px; height: 15px; stroke: var(--ink); fill: none; stroke-width: 1.7; transition: transform 0.2s var(--ease); }
-  .focus-card:hover .focus-link svg { transform: translateX(3px); }
+  .solution-list { margin-top: 16px; display: flex; flex-direction: column; gap: 9px; }
+  .solution-tick { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; }
+  .solution-tick svg { width: 13px; height: 13px; stroke: var(--green); fill: none; stroke-width: 2.4; flex-shrink: 0; }
 
-  /* ---------- Process ---------- */
-
-  .process-shell {
-    display: grid;
-    grid-template-columns: minmax(180px, 0.7fr) minmax(0, 3fr) minmax(140px, 0.6fr);
-    gap: clamp(20px, 3vw, 40px);
-    align-items: center;
-  }
-
-  .process-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-2); line-height: 1.6; }
-
-  .process-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
-
-  .pstep-num { font-size: 12.5px; font-weight: 600; color: var(--muted-2); }
-  .pstep-title { margin-top: 8px; font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
-  .pstep-body { margin-top: 6px; font-size: 12.5px; line-height: 1.6; color: var(--muted); }
-
-  .process-tag { text-align: right; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-2); line-height: 1.7; }
-  .process-tag .dash { width: 20px; height: 1px; background: var(--line); margin-left: auto; margin-bottom: 8px; }
-
-  /* ---------- Results ---------- */
-
-  .results-grid {
-    margin-top: 36px;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 14px;
-  }
-
-  .result-card {
+  .solution-mock {
+    margin-top: 18px;
     background: var(--white);
     border: 1px solid var(--line);
-    border-radius: 16px;
-    padding: 22px 20px;
+    border-radius: 14px;
+    padding: 14px;
+    flex: 1;
   }
 
-  .result-icon svg { width: 20px; height: 20px; stroke: var(--ink); fill: none; stroke-width: 1.6; }
-  .result-title { margin-top: 14px; font-size: 14px; font-weight: 600; }
-  .result-body { margin-top: 6px; font-size: 12px; line-height: 1.6; color: var(--muted); }
+  .mock-title { display: flex; align-items: center; justify-content: space-between; font-size: 11.5px; font-weight: 600; }
+  .mock-link { font-size: 10.5px; color: var(--muted-2); font-weight: 500; }
+
+  /* leads mock */
+  .lead-row { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-top: 1px solid var(--line-soft); }
+  .lead-row:first-of-type { border-top: none; margin-top: 10px; }
+  .lead-avatar {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--panel-2); color: var(--ink);
+    font-size: 9.5px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .lead-name { font-size: 11px; font-weight: 600; }
+  .lead-meta { font-size: 9.5px; color: var(--muted-2); margin-top: 1px; }
+  .lead-tag { margin-left: auto; font-size: 9px; font-weight: 600; color: var(--muted); background: var(--panel-2); padding: 3px 7px; border-radius: 999px; white-space: nowrap; }
+
+  /* listing mock */
+  .mock-tabs { margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap; }
+  .mock-tab { font-size: 9.5px; font-weight: 500; padding: 4px 9px; border-radius: 999px; background: var(--panel-2); color: var(--muted); }
+  .mock-tab.active { background: var(--ink); color: var(--white); }
+  .mock-actions { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .mock-action { font-size: 9.5px; font-weight: 500; color: var(--muted); display: flex; align-items: center; gap: 4px; }
+  .mock-action svg { width: 11px; height: 11px; stroke: var(--muted); fill: none; stroke-width: 1.8; }
+
+  /* search mock */
+  .mock-google { display: flex; align-items: center; gap: 8px; }
+  .mock-google svg { width: 15px; height: 15px; flex-shrink: 0; }
+  .mock-search-input { flex: 1; font-size: 10.5px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; }
+  .mock-sources { margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap; }
+  .mock-source { font-size: 9px; font-weight: 500; color: var(--muted-2); background: var(--panel-2); padding: 3px 8px; border-radius: 6px; }
+
+  /* ---------- Process (4 step) ---------- */
+
+  .stepper {
+    margin-top: 44px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+  }
+
+  .step { position: relative; padding-right: 20px; }
+  .step-top { display: flex; align-items: center; gap: 10px; }
+  .step-num { font-size: 12px; font-weight: 600; color: var(--muted-2); }
+  .step-icon {
+    width: 34px; height: 34px;
+    border-radius: 10px;
+    background: var(--green-tint);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-icon svg { width: 16px; height: 16px; stroke: var(--green); fill: none; stroke-width: 1.7; }
+  .step-title { margin-top: 12px; font-size: 15.5px; font-weight: 600; letter-spacing: -0.01em; }
+  .step-body { margin-top: 6px; font-size: 12px; line-height: 1.6; color: var(--muted); }
+
+  .step-arrow {
+    position: absolute;
+    top: 17px;
+    right: -4px;
+    color: var(--line);
+  }
+  .step-arrow svg { width: 16px; height: 16px; stroke: var(--line); fill: none; stroke-width: 1.6; }
+  .step:last-child .step-arrow { display: none; }
+
+  /* ---------- Testimonial ---------- */
+
+  .testimonial-shell {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    flex-wrap: wrap;
+    background: var(--panel);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius);
+    padding: clamp(24px, 3.4vw, 34px) clamp(24px, 3.6vw, 40px);
+  }
+
+  .testimonial-left { display: flex; align-items: center; gap: 16px; max-width: 640px; }
+  .testimonial-avatar {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--ink); color: var(--white);
+    font-size: 15px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .testimonial-quote { font-size: 14px; line-height: 1.6; color: var(--ink-soft); }
+  .testimonial-name { margin-top: 10px; font-size: 12.5px; font-weight: 600; }
+  .testimonial-name span { font-weight: 400; color: var(--muted); }
+
+  .testimonial-right { text-align: right; flex-shrink: 0; }
+  .stars { display: flex; gap: 3px; justify-content: flex-end; }
+  .stars svg { width: 16px; height: 16px; fill: var(--gold); stroke: none; }
+  .testimonial-tag { margin-top: 8px; font-size: 12px; font-weight: 500; color: var(--muted); white-space: nowrap; }
 
   /* ---------- About ---------- */
 
@@ -545,6 +662,7 @@
   /* ---------- Final CTA + footer ---------- */
 
   .final-cta {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -552,9 +670,14 @@
     gap: 24px;
   }
 
-  .final-title { font-size: clamp(24px, 2.6vw, 32px); font-weight: 600; letter-spacing: -0.02em; }
+  .final-eyebrow { font-size: 10.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #8A8A8A; }
+  .final-title { margin-top: 10px; font-size: clamp(22px, 2.4vw, 30px); font-weight: 600; letter-spacing: -0.02em; max-width: 22ch; }
   .final-sub { margin-top: 10px; font-size: 13px; line-height: 1.6; color: #A5A5A5; }
-  .final-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .final-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+  .final-caption { font-size: 11.5px; color: #8A8A8A; }
+
+  .final-note { position: absolute; top: -6px; right: 4%; text-align: right; transform: rotate(3deg); color: #9A9A9A; }
+  .final-note svg { stroke: #6A6A6A; }
 
   .cta-footer-group {
     margin: 0 clamp(16px, 3vw, 28px) clamp(16px, 3vw, 28px);
@@ -563,7 +686,7 @@
     border-radius: var(--radius);
   }
 
-  .cta-footer-group .final-cta { padding: clamp(24px, 3.4vw, 34px) clamp(20px, 3vw, 34px); }
+  .cta-footer-group .final-cta { padding: clamp(28px, 3.8vw, 40px) clamp(20px, 3vw, 34px) clamp(22px, 3vw, 30px); }
 
   .footer-inner {
     display: flex;
@@ -720,33 +843,38 @@
   /* ---------- Responsive ---------- */
 
   @media (max-width: 1080px) {
-    .focus-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .results-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .solution-grid { grid-template-columns: minmax(0, 1fr); max-width: 520px; margin-left: auto; margin-right: auto; }
+    .stepper { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 32px; }
+    .step:nth-child(2) .step-arrow { display: none; }
   }
 
   @media (max-width: 980px) {
     .nav-links { display: none; }
+    .header-tagline { display: none; }
+    .header-actions .btn-dark { display: none; }
     .nav-toggle { display: flex; }
     .hero-grid { grid-template-columns: minmax(0, 1fr); }
-    .audit-stage { margin-top: 20px; min-height: 340px; }
-    .audit-side { display: none; }
-    .audit-card { margin-right: 0; }
-    .process-shell { grid-template-columns: minmax(0, 1fr); gap: 20px; }
-    .process-steps { grid-template-columns: minmax(0, 1fr); gap: 22px; }
-    .process-tag { text-align: left; }
-    .process-tag .dash { margin-left: 0; }
+    .ai-stage { margin-top: 24px; min-height: 380px; }
+    .ai-card { position: static; width: 100% !important; margin-bottom: 12px; }
+    .ai-card-followup, .ai-card-listing, .ai-card-search { top: auto; right: auto; left: auto; bottom: auto; }
+    .ai-stage-bg { display: none; }
+    .ai-note { display: none; }
     .about-shell { grid-template-columns: minmax(0, 1fr); }
+    .testimonial-shell { justify-content: flex-start; }
+    .testimonial-right { text-align: left; }
+    .stars { justify-content: flex-start; }
   }
 
   @media (max-width: 720px) {
-    .focus-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .results-grid { grid-template-columns: minmax(0, 1fr); }
     .final-cta { flex-direction: column; align-items: flex-start; }
+    .final-actions { align-items: flex-start; }
+    .final-note { display: none; }
     .footer-inner { flex-direction: column; align-items: flex-start; }
   }
 
   @media (max-width: 560px) {
-    .focus-grid { grid-template-columns: minmax(0, 1fr); }
+    .stepper { grid-template-columns: minmax(0, 1fr); }
+    .step-arrow { display: none !important; }
     .hero-ctas .btn { flex: 1; }
   }
 </style>
@@ -758,14 +886,18 @@
       <a class="brand-lockup" href="index.html" aria-label="SLATES by ROQ — home"><img class="logo-mark" src="ASSETS/slates-logo.png" alt="SLATES" /><span class="brand-by" aria-hidden="true">by ROQ</span></a>
 
       <nav class="nav-links">
-        <a href="#services">Services</a>
-        <a href="#process">Process</a>
-        <a href="#results">Results</a>
+        <a href="#solutions">AI for Realtors</a>
+        <a href="#process">Workflows</a>
+        <a href="#process">How It Works</a>
+        <a href="#" data-talk>Audit</a>
         <a href="os.html" class="os-link">SLATES OS</a>
       </nav>
 
       <div class="header-actions">
-        <button type="button" class="btn btn-dark" data-talk>Let's Talk</button>
+        <span class="header-tagline">AI that drives growth.</span>
+        <button type="button" class="btn btn-dark" data-talk>Book an AI Audit
+          <svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
         <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
           <span></span>
           <span></span>
@@ -773,11 +905,12 @@
       </div>
     </div>
     <div class="nav-dropdown" id="navDropdown">
-      <a href="#services">Services</a>
-      <a href="#process">Process</a>
-      <a href="#results">Results</a>
+      <a href="#solutions">AI for Realtors</a>
+      <a href="#process">Workflows</a>
+      <a href="#" data-talk>Audit</a>
       <a href="os.html">SLATES OS</a>
       <a href="insights.html">Insights</a>
+      <a href="founder.html">Founder</a>
     </div>
   </header>
 
@@ -787,91 +920,188 @@
     <section class="hero">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <h1 class="hero-headline">Find what's holding your business back.</h1>
+          <div class="hero-eyebrow">Real Estate <span class="x">&times;</span> Artificial Intelligence <span class="x">&times;</span> Real Results</div>
 
-          <p class="hero-sub">Websites, visibility, automation, CRM, and growth systems — built around what your business actually needs.</p>
+          <h1 class="hero-headline">Turn AI into a growth engine for your real estate business.</h1>
+
+          <p class="hero-sub">Automate follow-up. Find better leads. Get found in search and AI.</p>
+
+          <p class="hero-body">SLATES helps Realtors implement practical AI systems for CRM, prospecting, marketing, and visibility — so you save time, build stronger relationships, and win more listings.</p>
 
           <div class="hero-ctas">
-            <button type="button" class="btn btn-dark btn-lg" data-talk>Start with an audit
+            <button type="button" class="btn btn-dark btn-lg" data-talk>Start With an Audit
               <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </button>
+            <a class="btn btn-light btn-lg" href="#solutions">See the System
+              <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.8"><path d="M8 5v14l11-7z"/></svg>
+            </a>
           </div>
 
-          <div class="hero-caption"><span class="dash"></span> Clearer insights. Stronger systems. Real growth.</div>
+          <div class="hero-checks">
+            <div class="hero-check"><span><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span>More qualified leads</div>
+            <div class="hero-check"><span><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span>Save hours each week</div>
+            <div class="hero-check"><span><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span>Win more listings</div>
+          </div>
         </div>
 
-        <!-- Audit card stage -->
-        <div class="audit-stage" aria-hidden="true">
-          <div class="audit-side">
-            <div class="audit-side-caption">Stronger businesses<br />go further.</div>
+        <!-- AI stage -->
+        <div class="ai-stage" aria-hidden="true">
+          <div class="ai-stage-bg"></div>
+
+          <div class="note ai-note ai-note-1">From leads<br />to listings.
+            <svg viewBox="0 0 40 30"><path d="M2 4c10 4 20 6 30 4M38 6l-4-8M38 6l-8 2"/></svg>
           </div>
 
-          <div class="audit-card">
-            <div class="audit-card-head">
-              <img class="logo-mark" src="ASSETS/slates-logo.png" alt="SLATES" />
-              <span class="audit-card-tag">Business Growth Audit</span>
+          <div class="ai-card ai-card-crm">
+            <div class="ai-card-head">
+              <span class="ai-card-head-left"><svg viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-7M22 19v-3"/></svg>CRM Pipeline</span>
+              <span class="ai-pill">+24 new leads</span>
+            </div>
+            <div class="ai-crm-row"><span>New Leads</span><span>24</span></div>
+            <div class="ai-crm-row"><span>Contacted</span><span>18</span></div>
+            <div class="ai-crm-row"><span>Nurturing</span><span>32</span></div>
+            <div class="ai-crm-row"><span>Appointments</span><span>12</span></div>
+            <div class="ai-crm-row"><span>Listings</span><span>7</span></div>
+          </div>
+
+          <div class="ai-card ai-card-followup">
+            <div class="ai-card-head">
+              <span class="ai-card-head-left"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>AI Follow-Up</span>
+              <span class="ai-pill">Generate</span>
+            </div>
+            <p class="ai-followup-body"><b>Hi Sarah,</b><br />Thanks for reaching out about the Maplewood listing! I'd be happy to set up a quick call. Are you available this week?<br />Best, Alex</p>
+            <span class="ai-pill muted" style="margin-top:9px; display:inline-block;">Personalized with AI</span>
+          </div>
+
+          <div class="ai-card ai-card-listing">
+            <div class="ai-card-head">
+              <span class="ai-card-head-left"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v9h14v-9"/></svg>Listing Description</span>
+              <span class="ai-pill">Generate</span>
+            </div>
+            <div class="ai-listing-thumb"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v9h14v-9"/></svg></div>
+            <p class="ai-listing-copy">Stunning modern home in Maplewood with open-concept living and a private backyard…</p>
+          </div>
+
+          <div class="ai-card ai-card-search">
+            <div class="ai-card-head">
+              <span class="ai-card-head-left">
+                <svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.6 30.2.5 24 .5 14.6.5 6.5 5.9 2.6 13.7l7.8 6.1C12.3 14 17.6 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.6 5.9c4.4-4.1 7-10.1 7-17.6z"/><path fill="#FBBC05" d="M10.4 28.2a14.6 14.6 0 010-8.4l-7.8-6.1a23.5 23.5 0 000 20.6l7.8-6.1z"/><path fill="#34A853" d="M24 47.5c6.2 0 11.5-2 15.4-5.6l-7.6-5.9c-2.1 1.4-4.8 2.2-7.8 2.2-6.4 0-11.7-4.5-13.6-10.3l-7.8 6.1C6.5 42.1 14.6 47.5 24 47.5z"/></svg>
+                AI Search Visibility
+              </span>
+            </div>
+            <div class="ai-search-bar">best real estate agent in austin</div>
+            <div class="ai-search-result">
+              <span class="ai-avatar">AR</span>
+              <p><b>Alex Rivera</b> is a top real estate agent in Austin, known for modern marketing and responsive communication.</p>
+            </div>
+            <span class="ai-pill" style="margin-top:9px; display:inline-block;">Featured in AI results</span>
+          </div>
+
+          <div class="note ai-note ai-note-2">More time<br />for what matters.
+            <svg viewBox="0 0 40 30"><path d="M2 26c10-4 20-10 24-22M20 2l6 2M20 2l0 8"/></svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= THREE PILLARS ================= -->
+    <section class="section-block bordered" id="solutions">
+      <div class="wrap">
+        <div class="focus-head">
+          <div class="eyebrow">Our Focus</div>
+          <h2 class="section-title-lg">Three AI systems built for real estate.</h2>
+          <p class="section-sub-lg">Find better leads, create content in minutes, and get found by the clients who are ready to work with you.</p>
+        </div>
+
+        <div class="solution-grid">
+          <div class="solution-card">
+            <span class="solution-icon"><svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>
+            <div class="solution-eyebrow">Find</div>
+            <div class="solution-title">Lead Flow AI</div>
+            <p class="solution-body">Turn more opportunities into clients with AI-powered lead management.</p>
+            <div class="solution-list">
+              <div class="solution-tick"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Lead follow-up sequences</div>
+              <div class="solution-tick"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>CRM cleanup &amp; prioritization</div>
+              <div class="solution-tick"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Seller opportunity research</div>
+              <div class="solution-tick"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Outreach assistance</div>
             </div>
 
-            <div class="audit-card-body">
-              <div class="audit-title">Business Growth Audit</div>
-              <p class="audit-sub">We find what's holding you back — and show you how to fix it.</p>
+            <div class="solution-mock">
+              <div class="mock-title">Leads <span class="mock-link">See All</span></div>
+              <div class="lead-row">
+                <span class="lead-avatar">JS</span>
+                <div><div class="lead-name">Jessica Smith</div><div class="lead-meta">New inquiry · 2m ago</div></div>
+                <span class="lead-tag">New</span>
+              </div>
+              <div class="lead-row">
+                <span class="lead-avatar">MR</span>
+                <div><div class="lead-name">Michael Roberts</div><div class="lead-meta">Home valuation · 1h ago</div></div>
+                <span class="lead-tag">Contacted</span>
+              </div>
+              <div class="lead-row">
+                <span class="lead-avatar">EW</span>
+                <div><div class="lead-name">Emma Wilson</div><div class="lead-meta">Buyer interest · 3h ago</div></div>
+                <span class="lead-tag">Nurturing</span>
+              </div>
+            </div>
+          </div>
 
-              <div class="audit-rows">
-                <div class="audit-row">
-                  <span class="audit-icon">
-                    <svg viewBox="0 0 48 48" style="stroke:none"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.6 30.2.5 24 .5 14.6.5 6.5 5.9 2.6 13.7l7.8 6.1C12.3 14 17.6 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.6 5.9c4.4-4.1 7-10.1 7-17.6z"/><path fill="#FBBC05" d="M10.4 28.2a14.6 14.6 0 010-8.4l-7.8-6.1a23.5 23.5 0 000 20.6l7.8-6.1z"/><path fill="#34A853" d="M24 47.5c6.2 0 11.5-2 15.4-5.6l-7.6-5.9c-2.1 1.4-4.8 2.2-7.8 2.2-6.4 0-11.7-4.5-13.6-10.3l-7.8 6.1C6.5 42.1 14.6 47.5 24 47.5z"/></svg>
-                  </span>
-                  <div>
-                    <div class="audit-row-name">Missing Google presence</div>
-                    <div class="audit-row-sub">You're not showing up in local search.</div>
-                  </div>
-                  <span class="audit-badge">
-                    <span class="audit-badge-pill">Needs Attention</span>
-                    <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
-                  </span>
-                </div>
+          <div class="solution-card">
+            <span class="solution-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg></span>
+            <div class="solution-eyebrow">Create</div>
+            <div class="solution-title">Content &amp; Docs AI</div>
+            <p class="solution-body">Create high-quality marketing and client documents in minutes, not hours.</p>
+            <div class="solution-list">
+              <div class="solution-tick"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Listing descriptions</div>
+              <div class="solution-tick"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>CMA / presentation support</div>
+              <div class="solution-tick"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Emails &amp; social posts</div>
+              <div class="solution-tick"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Client communication templates</div>
+            </div>
 
-                <div class="audit-row">
-                  <span class="audit-icon">
-                    <svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
-                  </span>
-                  <div>
-                    <div class="audit-row-name">Weak mobile website</div>
-                    <div class="audit-row-sub">Slow, hard to navigate, losing customers.</div>
-                  </div>
-                  <span class="audit-badge">
-                    <span class="audit-badge-pill">Needs Attention</span>
-                    <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
-                  </span>
-                </div>
+            <div class="solution-mock">
+              <div class="mock-title">Listing Description <span class="mock-link">Generate with AI</span></div>
+              <div class="mock-tabs">
+                <span class="mock-tab active">Modern</span>
+                <span class="mock-tab">Luxury</span>
+                <span class="mock-tab">Family</span>
+                <span class="mock-tab">Investment</span>
+              </div>
+              <div class="ai-listing-thumb" style="margin-top:10px;"><svg viewBox="0 0 24 24" style="stroke:#8A8A8A"><path d="M3 11l9-7 9 7"/><path d="M5 10v9h14v-9"/></svg></div>
+              <p class="ai-listing-copy">Stunning modern home in Maplewood with open-concept living, floor-to-ceiling windows, and a private backyard…</p>
+              <div class="mock-actions">
+                <span class="mock-action"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>Copy</span>
+                <span class="mock-action"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 1 3 6.7M3 12v6h6"/></svg>Rewrite</span>
+                <span class="mock-action"><svg viewBox="0 0 24 24"><path d="M8 12h8"/></svg>Shorten</span>
+              </div>
+            </div>
+          </div>
 
-                <div class="audit-row">
-                  <span class="audit-icon">
-                    <svg viewBox="0 0 24 24"><circle cx="8" cy="9" r="3"/><circle cx="16.5" cy="10" r="2.4"/><path d="M2.5 19c0-2.9 2.4-4.6 5.5-4.6s5.5 1.7 5.5 4.6M15 14.6c2.7.1 4.5 1.8 4.5 4.4"/></svg>
-                  </span>
-                  <div>
-                    <div class="audit-row-name">No lead follow-up</div>
-                    <div class="audit-row-sub">Leads aren't being captured or nurtured.</div>
-                  </div>
-                  <span class="audit-badge">
-                    <span class="audit-badge-pill impact">High Impact</span>
-                    <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
-                  </span>
-                </div>
+          <div class="solution-card">
+            <span class="solution-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
+            <div class="solution-eyebrow">Found</div>
+            <div class="solution-title">Visibility AI</div>
+            <p class="solution-body">Get found by the right clients — in Google and in AI tools like ChatGPT.</p>
+            <div class="solution-list">
+              <div class="solution-tick"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Personal brand positioning</div>
+              <div class="solution-tick"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Website &amp; SEO guidance</div>
+              <div class="solution-tick"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Google Business Profile</div>
+              <div class="solution-tick"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>AI / ChatGPT discoverability</div>
+            </div>
 
-                <div class="audit-row">
-                  <span class="audit-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
-                  </span>
-                  <div>
-                    <div class="audit-row-name">Low review activity</div>
-                    <div class="audit-row-sub">Fewer reviews = less trust and visibility.</div>
-                  </div>
-                  <span class="audit-badge">
-                    <span class="audit-badge-pill">Needs Attention</span>
-                    <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
-                  </span>
-                </div>
+            <div class="solution-mock">
+              <div class="mock-google">
+                <svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.7-6.7C35.6 2.6 30.2.5 24 .5 14.6.5 6.5 5.9 2.6 13.7l7.8 6.1C12.3 14 17.6 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.6 5.9c4.4-4.1 7-10.1 7-17.6z"/><path fill="#FBBC05" d="M10.4 28.2a14.6 14.6 0 010-8.4l-7.8-6.1a23.5 23.5 0 000 20.6l7.8-6.1z"/><path fill="#34A853" d="M24 47.5c6.2 0 11.5-2 15.4-5.6l-7.6-5.9c-2.1 1.4-4.8 2.2-7.8 2.2-6.4 0-11.7-4.5-13.6-10.3l-7.8 6.1C6.5 42.1 14.6 47.5 24 47.5z"/></svg>
+                <div class="mock-search-input">real estate agent austin</div>
+              </div>
+              <div class="ai-search-result" style="margin-top:12px;">
+                <span class="ai-avatar">AR</span>
+                <p><b>Alex Rivera</b> is a highly regarded real estate agent in Austin, known for modern marketing and a proven track record with buyers and sellers.</p>
+              </div>
+              <div class="mock-sources">
+                <span class="mock-source">Google Maps</span>
+                <span class="mock-source">Zillow</span>
+                <span class="mock-source">Realtor.com</span>
+                <span class="mock-source">Website</span>
               </div>
             </div>
           </div>
@@ -879,110 +1109,75 @@
       </div>
     </section>
 
-    <!-- ================= FIVE FOCUS AREAS ================= -->
-    <section class="section-block bordered" id="services">
-      <div class="wrap">
-        <div class="focus-head">
-          <div class="eyebrow">Our Focus</div>
-          <h2 class="section-title-lg">Five areas. A stronger business.</h2>
-          <p class="section-sub-lg">We diagnose weak points, implement the right solutions, and help you grow with systems that actually work.</p>
-        </div>
-
-        <div class="focus-grid">
-          <div class="focus-card">
-            <span class="focus-icon"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.6 7-12a7 7 0 10-14 0c0 5.4 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></span>
-            <div class="focus-title">Google Business Profile</div>
-            <p class="focus-body">Get found locally and turn searches into customers.</p>
-            <a class="focus-link" href="#process"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </div>
-
-          <div class="focus-card">
-            <span class="focus-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="13" rx="2"/><path d="M8 21h8M12 18v3"/></svg></span>
-            <div class="focus-title">Website</div>
-            <p class="focus-body">A faster, more effective website that converts.</p>
-            <a class="focus-link" href="os.html"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </div>
-
-          <div class="focus-card">
-            <span class="focus-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.4 6-5.4s6 2.1 6 5.4M17 11h4"/></svg></span>
-            <div class="focus-title">CRM</div>
-            <p class="focus-body">Capture, organize, and follow up with leads.</p>
-            <a class="focus-link" href="os.html"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </div>
-
-          <div class="focus-card">
-            <span class="focus-icon"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg></span>
-            <div class="focus-title">Automation</div>
-            <p class="focus-body">Save time, reduce manual work, and never miss a customer.</p>
-            <a class="focus-link" href="os.html"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </div>
-
-          <div class="focus-card">
-            <span class="focus-icon"><svg viewBox="0 0 24 24"><path d="M5 19V9M12 19V5M19 19v-7"/></svg></span>
-            <div class="focus-title">SEO</div>
-            <p class="focus-body">Increase visibility and drive consistent, long-term growth.</p>
-            <a class="focus-link" href="#results"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ================= PROCESS ================= -->
     <section class="section-block bordered" id="process">
-      <div class="wrap process-shell">
-        <div class="process-label">A simple<br />process for<br />real results.</div>
-
-        <div class="process-steps">
-          <div class="pstep">
-            <div class="pstep-num">01</div>
-            <div class="pstep-title">Diagnose</div>
-            <p class="pstep-body">We audit your business and find what's not working.</p>
-          </div>
-          <div class="pstep">
-            <div class="pstep-num">02</div>
-            <div class="pstep-title">Implement</div>
-            <p class="pstep-body">We build and set up the right solutions for your goals.</p>
-          </div>
-          <div class="pstep">
-            <div class="pstep-num">03</div>
-            <div class="pstep-title">Grow</div>
-            <p class="pstep-body">A stronger foundation. More customers. A bigger future.</p>
-          </div>
+      <div class="wrap">
+        <div class="focus-head">
+          <div class="eyebrow">A Simple Path to Real Results</div>
+          <h2 class="section-title-lg">AI that works the way Realtors work.</h2>
+          <p class="section-sub-lg">A straightforward path from where you are now to an AI system that actually saves you time and wins listings.</p>
         </div>
 
-        <div class="process-tag"><span class="dash"></span>Built around<br />what matters.</div>
+        <div class="stepper">
+          <div class="step">
+            <div class="step-top">
+              <span class="step-num">01</span>
+              <span class="step-icon"><svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>
+            </div>
+            <div class="step-title">Audit</div>
+            <p class="step-body">We assess your current tools, processes, and opportunities.</p>
+            <span class="step-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </div>
+          <div class="step">
+            <div class="step-top">
+              <span class="step-num">02</span>
+              <span class="step-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.9-.3 1.7 1.7 0 00-1 1.6V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1-1.6 1.7 1.7 0 00-1.9.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.9 1.7 1.7 0 00-1.6-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.6-1 1.7 1.7 0 00-.3-1.9l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.9.3H9a1.7 1.7 0 001-1.6V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.6 1.7 1.7 0 001.9-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.9V9a1.7 1.7 0 001.6 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.6 1z"/></svg></span>
+            </div>
+            <div class="step-title">Setup</div>
+            <p class="step-body">We implement the right AI systems for your business.</p>
+            <span class="step-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </div>
+          <div class="step">
+            <div class="step-top">
+              <span class="step-num">03</span>
+              <span class="step-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.4 6-5.4s6 2.1 6 5.4M17 11h4"/></svg></span>
+            </div>
+            <div class="step-title">Train</div>
+            <p class="step-body">We personalize workflows and show your team how to use them effectively.</p>
+            <span class="step-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </div>
+          <div class="step">
+            <div class="step-top">
+              <span class="step-num">04</span>
+              <span class="step-icon"><svg viewBox="0 0 24 24"><path d="M5 19V9M12 19V5M19 19v-7"/></svg></span>
+            </div>
+            <div class="step-title">Grow</div>
+            <p class="step-body">You save time, attract more clients, and win more listings.</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- ================= RESULTS ================= -->
+    <!-- ================= TESTIMONIAL ================= -->
     <section class="section-block bordered" id="results">
       <div class="wrap">
-        <div class="focus-head">
-          <div class="eyebrow">What Changes</div>
-          <h2 class="section-title-lg">Fixing the gaps moves the numbers that matter.</h2>
-          <p class="section-sub-lg">Every fix from the audit maps to something you can watch improve.</p>
-        </div>
-
-        <div class="results-grid">
-          <div class="result-card">
-            <span class="result-icon"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.6 7-12a7 7 0 10-14 0c0 5.4 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></span>
-            <div class="result-title">Local visibility</div>
-            <p class="result-body">A complete, active Google Business Profile that shows up when people search.</p>
+        <div class="testimonial-shell">
+          <div class="testimonial-left">
+            <span class="testimonial-avatar">MC</span>
+            <div>
+              <p class="testimonial-quote">&ldquo;SLATES helped me go from feeling overwhelmed by AI to actually using it in my business every day. I'm saving hours each week, my follow-up is consistent, and I've won 3 new listings in the last 60 days.&rdquo;</p>
+              <div class="testimonial-name">Megan Carter <span>| Realtor&reg;, Austin, TX</span></div>
+            </div>
           </div>
-          <div class="result-card">
-            <span class="result-icon"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span>
-            <div class="result-title">A site that converts</div>
-            <p class="result-body">Fast, mobile-first pages built to turn visitors into booked jobs.</p>
-          </div>
-          <div class="result-card">
-            <span class="result-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.4 6-5.4s6 2.1 6 5.4M17 11h4"/></svg></span>
-            <div class="result-title">No dropped leads</div>
-            <p class="result-body">Every inquiry captured and followed up automatically, not left in an inbox.</p>
-          </div>
-          <div class="result-card">
-            <span class="result-icon"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg></span>
-            <div class="result-title">More reviews, more trust</div>
-            <p class="result-body">A steady flow of new reviews instead of a stale, quiet profile.</p>
+          <div class="testimonial-right">
+            <div class="stars">
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+            </div>
+            <div class="testimonial-tag">A game-changer for modern Realtors.</div>
           </div>
         </div>
       </div>
@@ -994,10 +1189,10 @@
         <div class="about-shell">
           <div>
             <div class="eyebrow" style="text-align:left">About</div>
-            <h2 class="section-title-lg" style="max-width:none">A stronger business ahead.</h2>
-            <p class="about-body">SLATES is built and operated by <a href="founder.html" style="text-decoration:underline; text-underline-offset:3px;">Jared Kobernat</a>, founder of ROQ. We start with a straight-talk audit of your Google presence, website, lead follow-up, and reviews — then fix what's broken. What we build runs on SLATES OS, the connected system that keeps your business running once the audit is done.</p>
+            <h2 class="section-title-lg" style="max-width:none">Built for Realtors, run by ROQ.</h2>
+            <p class="about-body">SLATES is built and operated by <a href="founder.html" style="text-decoration:underline; text-underline-offset:3px;">Jared Kobernat</a>, founder of ROQ. We start with a straight-talk AI audit of your CRM, follow-up, content, and search visibility — then implement the systems that actually move the needle. What we build runs on SLATES OS, the connected system that keeps your business running once the audit is done.</p>
             <div class="about-actions">
-              <button type="button" class="btn btn-dark" data-talk>Start with an audit</button>
+              <button type="button" class="btn btn-dark" data-talk>Book an AI audit</button>
               <a class="btn btn-light" href="os.html">Explore SLATES OS</a>
             </div>
           </div>
@@ -1005,7 +1200,7 @@
           <div class="about-panel">
             <img class="logo-mark on-dark" src="ASSETS/slates-logo.png" alt="SLATES" />
             <div class="about-panel-title">One system after the audit.</div>
-            <p class="about-panel-body">Once the gaps are fixed, SLATES OS keeps your presence, leads, and jobs running in one place.</p>
+            <p class="about-panel-body">Once the AI systems are in place, SLATES OS keeps your leads, content, and visibility running in one place.</p>
             <div class="about-panel-list">
               <div class="about-tick"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>One login, one system</div>
               <div class="about-tick"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Real-time sync across tools</div>
@@ -1019,13 +1214,19 @@
     <div class="wrap">
       <div class="cta-footer-group">
         <section class="final-cta">
+          <div class="note final-note">Smarter tools.<br />Bigger opportunities.
+            <svg viewBox="0 0 40 30" width="34" height="26"><path d="M2 4c10 4 20 6 30 4M38 6l-4-8M38 6l-8 2"/></svg>
+          </div>
           <div>
-            <h2 class="final-title">Find what's holding you back.</h2>
-            <p class="final-sub">Start with a free Business Growth Audit —<br />no catch, even if you never hire us.</p>
+            <div class="final-eyebrow">Let's Build Your Next Chapter</div>
+            <h2 class="final-title">Ready to make AI useful in your real estate business?</h2>
+            <p class="final-sub">Get a personalized AI audit and see where your biggest opportunities are.</p>
           </div>
           <div class="final-actions">
-            <button type="button" class="btn btn-on-dark btn-lg" data-talk>Start with an audit</button>
-            <a class="btn btn-ghost-dark btn-lg" href="os.html">Explore SLATES OS</a>
+            <button type="button" class="btn btn-on-dark btn-lg" data-talk>Book an AI Audit
+              <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <span class="final-caption">No obligation. Just insights.</span>
           </div>
         </section>
 
@@ -1036,8 +1237,8 @@
           </div>
 
           <nav class="footer-links">
-            <a href="#services">Services</a>
-            <a href="#process">Process</a>
+            <a href="#solutions">AI for Realtors</a>
+            <a href="#process">Workflows</a>
             <a href="#results">Results</a>
             <a href="os.html">SLATES OS</a>
             <a href="#about">About</a>
@@ -1061,7 +1262,7 @@
       </button>
 
       <div id="modalFormState">
-        <p class="modal-intro" id="modalIntro">We want to add value to your business with no catch &mdash; even if you never hire us. Tell us more about your business so we can send you a free online evaluation and website preview.</p>
+        <p class="modal-intro" id="modalIntro">Get a free AI audit for your real estate business — no obligation, just insights on where AI can save you time and win more listings.</p>
 
         <form id="leadForm">
           <div class="form-row">
@@ -1070,25 +1271,25 @@
               <input type="text" id="fName" name="name" placeholder="Your name" required autocomplete="name" />
             </div>
             <div class="field">
-              <label for="fBusiness">Business name</label>
-              <input type="text" id="fBusiness" name="business" placeholder="Business name" required autocomplete="organization" />
+              <label for="fBusiness">Brokerage / team</label>
+              <input type="text" id="fBusiness" name="business" placeholder="Brokerage or team name" required autocomplete="organization" />
             </div>
           </div>
 
           <div class="field">
-            <label for="fWhat">What you do</label>
-            <input type="text" id="fWhat" name="what_you_do" placeholder="e.g. plumbing, HVAC, landscaping" required />
+            <label for="fWhat">What you focus on</label>
+            <input type="text" id="fWhat" name="what_you_do" placeholder="e.g. residential sales, luxury, buyer's agent" required />
           </div>
 
           <div class="field">
             <label for="fSite"><span class="opt">Current website (optional)</span></label>
-            <input type="text" id="fSite" name="current_website" placeholder="yourbusiness.com" />
+            <input type="text" id="fSite" name="current_website" placeholder="yourname.com" />
           </div>
 
           <div class="form-row">
             <div class="field">
               <label for="fEmail">Email</label>
-              <input type="email" id="fEmail" name="email" placeholder="you@business.com" required autocomplete="email" />
+              <input type="email" id="fEmail" name="email" placeholder="you@realestate.com" required autocomplete="email" />
             </div>
             <div class="field">
               <label for="fPhone"><span class="opt">Phone (optional)</span></label>
@@ -1159,7 +1360,10 @@
       });
 
       document.querySelectorAll('[data-talk]').forEach((btn) => {
-        btn.addEventListener('click', () => openModal());
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          openModal();
+        });
       });
 
       // SLATES' own Supabase project. Submissions go straight to the
